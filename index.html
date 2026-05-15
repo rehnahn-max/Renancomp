@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
+    <link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#050816">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<meta name="theme-color" content="#050816" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Assistência Técnica Premium</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
+```html
 <style>
-
-:root{
-    --primary:#00e5ff;
-    --secondary:#0077ff;
-    --bg:#050816;
-    --card:rgba(255,255,255,.05);
-    --border:rgba(255,255,255,.08);
-}
 
 *{
     margin:0;
@@ -34,62 +26,152 @@
 
 html{
     scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
 }
 
 body{
     min-height:100vh;
     overflow-x:hidden;
     font-family:'Rajdhani',sans-serif;
-    background:var(--bg);
-    color:#fff;
+    background:#050816;
+    color:white;
     position:relative;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
     -webkit-tap-highlight-color:transparent;
 }
+
+/* FUNDO */
 
 .background{
     position:fixed;
     inset:0;
 
     background:
-    linear-gradient(rgba(2,3,10,.60), rgba(5,8,22,.75)),
+    linear-gradient(rgba(2,3,10,.45), rgba(5,8,22,.55)),
     url('Fundo.jpg') center center/cover no-repeat;
 
-    transform:scale(1.02);
+    filter:
+    contrast(1.15)
+    brightness(1.05)
+    saturate(1.1);
 
-    will-change:transform;
+    transform:scale(1.03);
 
     z-index:-5;
 }
 
-.background::after{
-    content:'';
-    position:absolute;
-    inset:0;
+/* PARTÍCULAS */
 
-    background:
-    radial-gradient(circle at top, rgba(0,229,255,.18), transparent 40%),
-    radial-gradient(circle at bottom, rgba(0,119,255,.15), transparent 40%);
-}
-
-canvas{
+.particles{
     position:fixed;
     inset:0;
-    width:100%;
-    height:100%;
+    overflow:hidden;
     z-index:-4;
-    pointer-events:none;
 }
 
+.particles span{
+    position:absolute;
+    display:block;
+
+    width:6px;
+    height:6px;
+
+    background:#00d9ff;
+
+    border-radius:50%;
+
+    opacity:.95;
+
+    box-shadow:
+    0 0 5px #00d9ff,
+    0 0 15px #00d9ff,
+    0 0 30px #00d9ff,
+    0 0 60px #00d9ff,
+    0 0 100px #00d9ff;
+
+    animation:animate linear infinite;
+}
+
+/* MUITAS PARTÍCULAS */
+
+.particles span:nth-child(1){left:2%;animation-duration:15s;animation-delay:0s;}
+.particles span:nth-child(2){left:4%;animation-duration:12s;animation-delay:1s;}
+.particles span:nth-child(3){left:6%;animation-duration:18s;animation-delay:2s;}
+.particles span:nth-child(4){left:8%;animation-duration:14s;animation-delay:3s;}
+.particles span:nth-child(5){left:10%;animation-duration:16s;animation-delay:4s;}
+.particles span:nth-child(6){left:12%;animation-duration:13s;animation-delay:5s;}
+.particles span:nth-child(7){left:14%;animation-duration:17s;animation-delay:2s;}
+.particles span:nth-child(8){left:16%;animation-duration:15s;animation-delay:1s;}
+.particles span:nth-child(9){left:18%;animation-duration:11s;animation-delay:6s;}
+.particles span:nth-child(10){left:20%;animation-duration:18s;animation-delay:3s;}
+.particles span:nth-child(11){left:22%;animation-duration:15s;animation-delay:5s;}
+.particles span:nth-child(12){left:24%;animation-duration:13s;animation-delay:7s;}
+.particles span:nth-child(13){left:26%;animation-duration:19s;animation-delay:2s;}
+.particles span:nth-child(14){left:28%;animation-duration:16s;animation-delay:4s;}
+.particles span:nth-child(15){left:30%;animation-duration:12s;animation-delay:1s;}
+.particles span:nth-child(16){left:32%;animation-duration:17s;animation-delay:6s;}
+.particles span:nth-child(17){left:34%;animation-duration:15s;animation-delay:8s;}
+.particles span:nth-child(18){left:36%;animation-duration:14s;animation-delay:3s;}
+.particles span:nth-child(19){left:38%;animation-duration:20s;animation-delay:5s;}
+.particles span:nth-child(20){left:40%;animation-duration:12s;animation-delay:7s;}
+.particles span:nth-child(21){left:42%;animation-duration:15s;animation-delay:2s;}
+.particles span:nth-child(22){left:44%;animation-duration:16s;animation-delay:4s;}
+.particles span:nth-child(23){left:46%;animation-duration:13s;animation-delay:1s;}
+.particles span:nth-child(24){left:48%;animation-duration:19s;animation-delay:6s;}
+.particles span:nth-child(25){left:50%;animation-duration:15s;animation-delay:3s;}
+.particles span:nth-child(26){left:52%;animation-duration:18s;animation-delay:7s;}
+.particles span:nth-child(27){left:54%;animation-duration:14s;animation-delay:5s;}
+.particles span:nth-child(28){left:56%;animation-duration:16s;animation-delay:2s;}
+.particles span:nth-child(29){left:58%;animation-duration:11s;animation-delay:4s;}
+.particles span:nth-child(30){left:60%;animation-duration:17s;animation-delay:6s;}
+.particles span:nth-child(31){left:62%;animation-duration:15s;animation-delay:8s;}
+.particles span:nth-child(32){left:64%;animation-duration:13s;animation-delay:3s;}
+.particles span:nth-child(33){left:66%;animation-duration:19s;animation-delay:1s;}
+.particles span:nth-child(34){left:68%;animation-duration:16s;animation-delay:7s;}
+.particles span:nth-child(35){left:70%;animation-duration:15s;animation-delay:5s;}
+.particles span:nth-child(36){left:72%;animation-duration:12s;animation-delay:2s;}
+.particles span:nth-child(37){left:74%;animation-duration:18s;animation-delay:4s;}
+.particles span:nth-child(38){left:76%;animation-duration:15s;animation-delay:6s;}
+.particles span:nth-child(39){left:78%;animation-duration:14s;animation-delay:8s;}
+.particles span:nth-child(40){left:80%;animation-duration:20s;animation-delay:1s;}
+.particles span:nth-child(41){left:82%;animation-duration:15s;animation-delay:3s;}
+.particles span:nth-child(42){left:84%;animation-duration:16s;animation-delay:5s;}
+.particles span:nth-child(43){left:86%;animation-duration:12s;animation-delay:7s;}
+.particles span:nth-child(44){left:88%;animation-duration:18s;animation-delay:2s;}
+.particles span:nth-child(45){left:90%;animation-duration:15s;animation-delay:4s;}
+.particles span:nth-child(46){left:92%;animation-duration:13s;animation-delay:6s;}
+.particles span:nth-child(47){left:94%;animation-duration:19s;animation-delay:8s;}
+.particles span:nth-child(48){left:96%;animation-duration:16s;animation-delay:1s;}
+.particles span:nth-child(49){left:98%;animation-duration:15s;animation-delay:5s;}
+
+@keyframes animate{
+
+    0%{
+        transform:translateY(110vh) scale(0);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-10vh) scale(1.2);
+        opacity:0;
+    }
+
+}
+
+/* CONTAINER */
+
 .container{
-    width:min(95%, 980px);
+    width:95%;
+    max-width:950px;
     margin:auto;
-    padding:35px 15px 80px;
+    padding:30px 15px 80px;
     position:relative;
     z-index:2;
 }
+
+/* HEADER */
 
 .hero{
     text-align:center;
@@ -98,75 +180,91 @@ canvas{
 
 .hero h1{
     font-family:'Orbitron',sans-serif;
-    font-size:clamp(2.3rem,6vw,4.5rem);
-    color:var(--primary);
+    font-size:clamp(2.2rem,6vw,4rem);
+    color:#00ffff;
     letter-spacing:3px;
 
-    text-shadow:
-    0 0 8px rgba(0,229,255,.8),
-    0 0 25px rgba(0,229,255,.45),
-    0 0 50px rgba(0,229,255,.2);
-
-    animation:neonPulse 2.2s ease-in-out infinite alternate;
+    animation:neonBlink 1.5s infinite alternate;
 }
 
-@keyframes neonPulse{
+@keyframes neonBlink{
 
-    from{
-        opacity:.92;
-        transform:translateY(0px);
+    0%{
+        text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
     }
 
-    to{
-        opacity:1;
-        transform:translateY(-2px);
+    100%{
+        text-shadow:
+        0 0 10px #00ffff,
+        0 0 25px #00ffff,
+        0 0 50px #00ffff,
+        0 0 80px #00ffff;
     }
 
 }
 
 .hero p{
-    margin-top:12px;
+    margin-top:10px;
     font-size:clamp(1rem,2vw,1.3rem);
-    color:#fff;
+    color:#ffffff;
     font-family:'Orbitron',sans-serif;
     letter-spacing:2px;
-    opacity:.92;
 }
+
+/* CARD */
 
 .card{
     background:rgba(255,255,255,.06);
 
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(14px);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
 
-    border-radius:30px;
+    border-radius:28px;
 
-    padding:28px;
+    padding:25px;
+
+    animation:cardGlow 3s infinite alternate;
 
     box-shadow:
-    0 0 25px rgba(0,229,255,.10),
-    0 0 60px rgba(0,119,255,.08);
-
-    will-change:transform;
-
-    transform:translateZ(0);
+    0 0 25px rgba(0,255,255,.18),
+    0 0 60px rgba(0,255,255,.08);
 }
+
+@keyframes cardGlow{
+
+    0%{
+        box-shadow:
+        0 0 15px rgba(0,255,255,.15),
+        0 0 35px rgba(0,255,255,.08);
+    }
+
+    100%{
+        box-shadow:
+        0 0 30px rgba(0,255,255,.35),
+        0 0 70px rgba(0,255,255,.12);
+    }
+
+}
+
+/* TABELA */
 
 .table-title{
     text-align:center;
     font-family:'Orbitron',sans-serif;
     font-size:clamp(1.5rem,3vw,2.2rem);
-    margin-bottom:28px;
-    color:var(--primary);
+    margin-bottom:25px;
+    color:#00ffff;
     letter-spacing:2px;
 }
 
 .services{
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:20px;
 }
 
 .service{
@@ -177,80 +275,76 @@ canvas{
 
     padding:22px;
 
-    border-radius:24px;
+    border-radius:22px;
 
-    background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.07);
 
-    border:1px solid rgba(0,229,255,.12);
+    border:1px solid rgba(0,255,255,.15);
 
-    transition:
-    transform .25s ease,
-    background .25s ease,
-    box-shadow .25s ease;
+    transition:.35s;
 
     flex-wrap:wrap;
 
-    animation:serviceBlink 2.5s ease-in-out infinite alternate;
-
-    will-change:transform;
+    animation:serviceGlow 2.5s infinite alternate;
 }
 
-@keyframes serviceBlink{
+@keyframes serviceGlow{
 
-    from{
-        box-shadow:
-        0 0 10px rgba(0,229,255,.08);
+    0%{
+        box-shadow:0 0 10px rgba(0,255,255,.08);
     }
 
-    to{
+    100%{
         box-shadow:
-        0 0 20px rgba(0,229,255,.18),
-        0 0 40px rgba(0,119,255,.08);
+        0 0 18px rgba(0,255,255,.22),
+        0 0 35px rgba(0,255,255,.12);
     }
 
 }
 
 .service:hover{
-    transform:translateY(-4px);
+    transform:translateY(-4px) scale(1.01);
 
-    background:rgba(0,229,255,.08);
+    background:rgba(0,255,255,.08);
 
     box-shadow:
-    0 0 18px rgba(0,229,255,.20),
-    0 0 45px rgba(0,119,255,.12);
+    0 0 20px rgba(0,255,255,.25),
+    0 0 45px rgba(0,255,255,.18);
 }
 
 .service-info h2{
     font-size:1.15rem;
     margin-bottom:8px;
-    color:#fff;
+    color:#ffffff;
 }
 
 .price{
-    color:var(--primary);
+    color:#00ffff;
     font-size:1.4rem;
-    font-weight:700;
+    font-weight:bold;
     font-family:'Orbitron',sans-serif;
 
     text-shadow:
-    0 0 8px rgba(0,229,255,.7);
+    0 0 10px #00ffff;
 }
+
+/* BOTÃO */
 
 .whatsapp-btn{
 
     text-decoration:none;
 
-    background:linear-gradient(45deg,var(--primary),var(--secondary));
+    background:linear-gradient(45deg,#00ffff,#0077ff);
 
-    color:#fff;
+    color:white;
 
-    padding:14px 22px;
+    padding:14px 20px;
 
     border-radius:16px;
 
-    font-weight:700;
+    font-weight:bold;
 
-    transition:.25s ease;
+    transition:.3s;
 
     white-space:nowrap;
 
@@ -258,122 +352,106 @@ canvas{
 
     font-size:.9rem;
 
-    min-height:48px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     box-shadow:
-    0 0 18px rgba(0,229,255,.25);
+    0 0 15px rgba(0,255,255,.35);
 }
 
 .whatsapp-btn:hover{
 
-    transform:translateY(-2px);
+    transform:scale(1.05);
 
     box-shadow:
-    0 0 28px rgba(0,229,255,.40),
-    0 0 50px rgba(0,119,255,.15);
+    0 0 25px rgba(0,255,255,.6),
+    0 0 50px rgba(0,255,255,.25);
 }
+
+/* INFO */
 
 .info{
     margin-top:30px;
 
     padding:24px;
 
-    border-radius:24px;
+    border-radius:22px;
 
-    background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.06);
 
-    border:1px solid rgba(0,229,255,.12);
+    border:1px solid rgba(0,255,255,.15);
 
     font-family:'Orbitron',sans-serif;
 
-    line-height:1.9;
+    line-height:2;
 
     box-shadow:
-    0 0 20px rgba(0,229,255,.05);
+    0 0 20px rgba(0,255,255,.08);
 }
 
 .info p{
     display:flex;
-    align-items:flex-start;
+    align-items:center;
     gap:10px;
 
     margin-bottom:14px;
 
-    padding:14px;
+    padding:12px;
 
-    border-radius:16px;
+    border-radius:14px;
 
     background:rgba(255,255,255,.03);
 }
 
 .info strong{
-    color:var(--primary);
+    color:#00ffff;
 }
+
+/* OBS */
 
 .obs{
     margin-top:25px;
 
     padding:20px;
 
-    border-radius:22px;
+    border-radius:20px;
 
-    background:rgba(255,255,255,.04);
+    background:rgba(255,255,255,.05);
 
     border:1px solid rgba(255,255,255,.08);
 
     text-align:center;
 
-    line-height:1.9;
-
-    font-size:.95rem;
+    line-height:1.8;
 }
 
+/* FOOTER */
+
 .footer{
-    margin-top:38px;
+    margin-top:35px;
     text-align:center;
     color:#d0d0d0;
     font-size:1rem;
     letter-spacing:1px;
-    opacity:.9;
 }
 
-input,
-textarea,
-button{
-    font-size:16px;
-    -webkit-appearance:none;
-    border:none;
-    outline:none;
-}
+/* RESPONSIVO */
 
 @media(max-width:768px){
 
     .container{
         width:100%;
-        padding:22px 14px 60px;
-    }
-
-    .hero{
-        margin-bottom:30px;
+        padding:20px 14px 60px;
     }
 
     .hero h1{
         font-size:2.2rem;
-        line-height:1.2;
     }
 
     .hero p{
-        font-size:.9rem;
-        line-height:1.7;
+        font-size:.95rem;
     }
 
     .card{
         padding:18px;
-        border-radius:24px;
+        border-radius:22px;
     }
 
     .service{
@@ -397,7 +475,7 @@ button{
     .whatsapp-btn{
         width:100%;
         text-align:center;
-        font-size:.82rem;
+        font-size:.85rem;
     }
 
     .info{
@@ -405,29 +483,55 @@ button{
     }
 
     .info p{
-        font-size:.88rem;
-        line-height:1.8;
+        font-size:.9rem;
+        line-height:1.7;
     }
 
     .obs{
-        font-size:.88rem;
-        line-height:1.8;
-    }
-
-    .footer{
         font-size:.9rem;
-        line-height:1.7;
     }
 
 }
 
 </style>
+
 </head>
 <body>
 
 <div class="background"></div>
 
-<canvas id="particles"></canvas>
+<div class="particles">
+    <span style="left:5%; animation-delay:0s;"></span>
+    <span style="left:10%; animation-delay:2s;"></span>
+    <span style="left:15%; animation-delay:4s;"></span>
+    <span style="left:20%; animation-delay:1s;"></span>
+    <span style="left:25%; animation-delay:3s;"></span>
+    <span style="left:30%; animation-delay:5s;"></span>
+    <span style="left:35%; animation-delay:7s;"></span>
+    <span style="left:40%; animation-delay:2s;"></span>
+    <span style="left:45%; animation-delay:6s;"></span>
+    <span style="left:50%; animation-delay:1s;"></span>
+    <span style="left:55%; animation-delay:3s;"></span>
+    <span style="left:60%; animation-delay:5s;"></span>
+    <span style="left:65%; animation-delay:7s;"></span>
+    <span style="left:70%; animation-delay:2s;"></span>
+    <span style="left:75%; animation-delay:4s;"></span>
+    <span style="left:80%; animation-delay:6s;"></span>
+    <span style="left:85%; animation-delay:1s;"></span>
+    <span style="left:90%; animation-delay:5s;"></span>
+    <span style="left:95%; animation-delay:3s;"></span>
+
+    <!-- MAIS PARTÍCULAS -->
+    <span style="left:8%; animation-delay:8s;"></span>
+    <span style="left:18%; animation-delay:9s;"></span>
+    <span style="left:28%; animation-delay:10s;"></span>
+    <span style="left:38%; animation-delay:11s;"></span>
+    <span style="left:48%; animation-delay:12s;"></span>
+    <span style="left:58%; animation-delay:13s;"></span>
+    <span style="left:68%; animation-delay:14s;"></span>
+    <span style="left:78%; animation-delay:15s;"></span>
+    <span style="left:88%; animation-delay:16s;"></span>
+</div>
 
 <div class="container">
 
@@ -516,25 +620,22 @@ button{
 
         </div>
 
-        <div class="info">
+          <div class="info">
+    <p>
+        ⚡ Pra dar aquela turbinada na sua máquina será feito um orçamento por <strong>R$20</strong>.
+    </p>
 
-            <p>
-                ⚡ Pra dar aquela turbinada na sua máquina será feito um orçamento por <strong>R$20</strong>.
-            </p>
+    <p>
+        ✅ O valor só é descontado após aceito o orçamento.
+    </p>
 
-            <p>
-                ✅ O valor só é descontado após aceito o orçamento.
-            </p>
-
-            <p>
-                🚗 Busco a domicílio taxa <strong>R$20</strong> dependendo da localidade.
-            </p>
-
-        </div>
+    <p>
+        🚗 Buscar a domicílio taxa <strong>R$20</strong> dependendo da localidade.
+    </p>
+</div>
 
         <div class="obs">
-            <strong>Obs:</strong>
-            As peças são por conta do cliente, com garantia de 90 dias de acordo com o código do consumidor Artigo 26, inciso II.
+            <strong>Obs:</strong> As peças são por conta do cliente, com garantia de 90 dias de acordo com o código do consumidor Artigo 26, inciso II.
         </div>
 
     </div>
@@ -546,63 +647,9 @@ button{
 </div>
 
 <script>
-
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-
-function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js');
 }
-
-resize();
-window.addEventListener('resize', resize);
-
-const particles = [];
-const totalParticles = window.innerWidth < 768 ? 45 : 80;
-
-for(let i = 0; i < totalParticles; i++){
-
-    particles.push({
-        x:Math.random() * canvas.width,
-        y:Math.random() * canvas.height,
-        radius:Math.random() * 2.2,
-        speedX:(Math.random() - 0.5) * 0.25,
-        speedY:(Math.random() - 0.5) * 0.25,
-        opacity:Math.random() * 0.8
-    });
-
-}
-
-function animate(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p => {
-
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if(p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-        if(p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-
-        ctx.fillStyle = `rgba(0,229,255,${p.opacity})`;
-
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#00e5ff';
-
-        ctx.fill();
-
-    });
-
-    requestAnimationFrame(animate);
-}
-
-animate();
-
 </script>
 
 </body>
