@@ -539,13 +539,41 @@ CENTRAL DE ORDEM DE SERVIÇO
 
 <input type="text" id="equipamento" placeholder="Equipamento">
 
-<input type="text" id="marca" placeholder="Marca / Modelo">
-
 <textarea id="defeito" placeholder="Defeito Relatado"></textarea>
 
-<textarea id="observacoes" placeholder="Observações Técnicas"></textarea>
+<select id="valor">
 
-<input type="number" id="valor" placeholder="Valor do Serviço">
+<option value="">Selecione o Serviço</option>
+
+<option value="Troca de teclado notebook - R$120">
+Troca de teclado notebook - R$120
+</option>
+
+<option value="Troca de tela notebook - R$120">
+Troca de tela notebook - R$120
+</option>
+
+<option value="Montagem de computador - R$150">
+Montagem de computador - R$150
+</option>
+
+<option value="Formatação - R$80">
+Formatação - R$80
+</option>
+
+<option value="Formatação com backup - R$120">
+Formatação com backup - R$120
+</option>
+
+<option value="Limpeza com organização de cabos - R$80">
+Limpeza com organização de cabos - R$80
+</option>
+
+<option value="Orçamento técnico - R$20">
+Orçamento técnico - R$20
+</option>
+
+</select>
 
 <input type="text" id="endereco" placeholder="Endereço para Uber Entrega">
 
@@ -584,11 +612,9 @@ UBER ENTREGA
 #cliente,
 #telefone,
 #equipamento,
-#marca,
 #valor,
 #endereco,
-#defeito,
-#observacoes{
+#defeito{
 
 width:100%;
 padding:16px;
@@ -608,8 +634,16 @@ font-family:'Orbitron',sans-serif;
 
 }
 
-#defeito,
-#observacoes{
+#valor{
+cursor:pointer;
+}
+
+#valor option{
+background:#050816;
+color:#fff;
+}
+
+#defeito{
 height:120px;
 resize:none;
 }
@@ -708,9 +742,7 @@ numeroOS,
 cliente,
 telefone,
 equipamento,
-marca,
 defeito,
-observacoes,
 valor,
 endereco,
 data
@@ -737,21 +769,13 @@ ORDEM DE SERVIÇO Nº ${numeroOS}
 </div>
 
 <div class="os-box">
-<strong>Marca/Modelo:</strong> ${marca}
-</div>
-
-<div class="os-box">
 <strong>Defeito:</strong><br>
 ${defeito}
 </div>
 
 <div class="os-box">
-<strong>Observações:</strong><br>
-${observacoes}
-</div>
-
-<div class="os-box">
-<strong>Valor:</strong> R$ ${valor}
+<strong>Serviço:</strong><br>
+${valor}
 </div>
 
 <div class="os-box">
@@ -789,7 +813,8 @@ const mensagem = `
 ⚠ Defeito:
 ${dadosOS.defeito}
 
-💰 Valor: R$ ${dadosOS.valor}
+🛠 Serviço:
+${dadosOS.valor}
 
 📅 Data: ${dadosOS.data}
 `;
@@ -844,17 +869,13 @@ doc.text(`Telefone: ${dadosOS.telefone}`, 20, 60);
 
 doc.text(`Equipamento: ${dadosOS.equipamento}`, 20, 70);
 
-doc.text(`Marca: ${dadosOS.marca}`, 20, 80);
+doc.text(`Defeito: ${dadosOS.defeito}`, 20, 85);
 
-doc.text(`Defeito: ${dadosOS.defeito}`, 20, 95);
+doc.text(`Serviço: ${dadosOS.valor}`, 20, 110);
 
-doc.text(`Observações: ${dadosOS.observacoes}`, 20, 120);
+doc.text(`Data: ${dadosOS.data}`, 20, 130);
 
-doc.text(`Valor: R$ ${dadosOS.valor}`, 20, 145);
-
-doc.text(`Data: ${dadosOS.data}`, 20, 155);
-
-doc.text('Garantia de 90 dias conforme CDC Art. 26 inciso II', 20, 180);
+doc.text('Garantia de 90 dias conforme CDC Art. 26 inciso II', 20, 170);
 
 doc.save(`OS-${dadosOS.numeroOS}.pdf`);
 
