@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <meta name="theme-color" content="#050816" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -87,4 +92,759 @@ canvas{
 }
 
 .hero{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.hero h1{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(2.3rem,6vw,4.5rem);
+    color:var(--primary);
+    letter-spacing:3px;
+
+    text-shadow:
+    0 0 8px rgba(0,229,255,.8),
+    0 0 25px rgba(0,229,255,.45),
+    0 0 50px rgba(0,229,255,.2);
+
+    animation:neonPulse 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse{
+
+    from{
+        opacity:.92;
+        transform:translateY(0px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(-2px);
+    }
+
+}
+
+.hero p{
+    margin-top:12px;
+    font-size:clamp(1rem,2vw,1.3rem);
+    color:#fff;
+    font-family:'Orbitron',sans-serif;
+    letter-spacing:2px;
+    opacity:.92;
+}
+
+.card{
+    background:rgba(255,255,255,.06);
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:30px;
+
+    padding:28px;
+
+    box-shadow:
+    0 0 25px rgba(0,229,255,.10),
+    0 0 60px rgba(0,119,255,.08);
+
+    margin-bottom:35px;
+}
+
+.table-title{
+    text-align:center;
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(1.5rem,3vw,2.2rem);
+    margin-bottom:28px;
+    color:var(--primary);
+    letter-spacing:2px;
+}
+
+.services{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.service{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+
+    padding:22px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(0,229,255,.12);
+
+    transition:.25s ease;
+
+    flex-wrap:wrap;
+
+    animation:serviceBlink 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes serviceBlink{
+
+    from{
+        box-shadow:0 0 10px rgba(0,229,255,.08);
+    }
+
+    to{
+        box-shadow:
+        0 0 20px rgba(0,229,255,.18),
+        0 0 40px rgba(0,119,255,.08);
+    }
+
+}
+
+.service:hover{
+    transform:translateY(-4px);
+
+    background:rgba(0,229,255,.08);
+}
+
+.service-info h2{
+    font-size:1.15rem;
+    margin-bottom:8px;
+    color:#fff;
+}
+
+.price{
+    color:var(--primary);
+    font-size:1.4rem;
+    font-weight:700;
+    font-family:'Orbitron',sans-serif;
+}
+
+.whatsapp-btn{
+
+    text-decoration:none;
+
+    background:linear-gradient(45deg,var(--primary),var(--secondary));
+
+    color:#fff;
+
+    padding:14px 22px;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
+    white-space:nowrap;
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:.9rem;
+
+    min-height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+
+    cursor:pointer;
+}
+
+.whatsapp-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.info{
+    margin-top:30px;
+
+    padding:24px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(0,229,255,.12);
+
+    font-family:'Orbitron',sans-serif;
+
+    line-height:1.9;
+}
+
+.info p{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+
+    margin-bottom:14px;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.03);
+}
+
+.obs{
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+    line-height:1.9;
+
+    font-size:.95rem;
+}
+
+.footer{
+    margin-top:38px;
+    text-align:center;
+    color:#d0d0d0;
+    font-size:1rem;
+    letter-spacing:1px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:16px;
+margin-bottom:15px;
+border-radius:18px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(0,229,255,.15);
+color:#fff;
+font-size:15px;
+font-family:'Orbitron',sans-serif;
+outline:none;
+}
+
+select option{
+background:#050816;
+}
+
+textarea{
+height:120px;
+resize:none;
+}
+
+.actions-os{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+#resultadoOS{
+display:none;
+margin-top:25px;
+padding:25px;
+border-radius:25px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(0,229,255,.15);
+line-height:2;
+font-family:'Orbitron',sans-serif;
+}
+
+.os-title{
+font-size:1.7rem;
+color:#00e5ff;
+margin-bottom:20px;
+text-align:center;
+}
+
+.os-box{
+padding:15px;
+margin-bottom:12px;
+border-radius:15px;
+background:rgba(255,255,255,.03);
+}
+
+.status{
+color:#00e5ff;
+font-weight:bold;
+}
+
+.history-card{
+margin-top:20px;
+padding:18px;
+border-radius:20px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(0,229,255,.15);
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:#050816;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:999999;
+transition:opacity .5s ease;
+}
+
+.loader-ring{
+width:90px;
+height:90px;
+border-radius:50%;
+border:4px solid rgba(255,255,255,.1);
+border-top:4px solid #00e5ff;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+.loader-text{
+margin-top:25px;
+font-family:'Orbitron',sans-serif;
+letter-spacing:3px;
+color:#00e5ff;
+}
+
+.toast{
+position:fixed;
+bottom:30px;
+right:30px;
+padding:16px 22px;
+background:rgba(0,229,255,.12);
+border:1px solid rgba(0,229,255,.3);
+backdrop-filter:blur(10px);
+border-radius:18px;
+font-family:'Orbitron',sans-serif;
+color:#fff;
+z-index:99999;
+opacity:0;
+transform:translateY(20px);
+transition:.35s ease;
+}
+
+.toast.show{
+opacity:1;
+transform:translateY(0);
+}
+
+#installApp{
+position:fixed;
+bottom:25px;
+left:25px;
+z-index:9999;
+}
+
+@media(max-width:768px){
+
+.container{
+width:100%;
+padding:22px 14px 60px;
+}
+
+.service{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.actions-os{
+flex-direction:column;
+}
+
+.actions-os .whatsapp-btn,
+.whatsapp-btn{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div id="loader">
+<div class="loader-ring"></div>
+<div class="loader-text">
+RENAN TECH PREMIUM
+</div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div class="background"></div>
+
+<canvas id="particles"></canvas>
+
+<div class="container">
+
+<div class="hero">
+<h1>RENAN TECH PREMIUM</h1>
+<p>Performance • Upgrade • Manutenção Profissional</p>
+</div>
+
+<div class="card">
+
+<h2 class="table-title">Tabela de Preços</h2>
+
+<div class="services">
+
+<div class="service">
+<div class="service-info">
+<h2>Troca de teclado notebook</h2>
+<div class="price">R$120</div>
+</div>
+<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Troca%20de%20teclado%20notebook%20-%20Valor:%20R$120" target="_blank">
+Agendar Serviço
+</a>
+</div>
+
+<div class="service">
+<div class="service-info">
+<h2>Troca de tela notebook</h2>
+<div class="price">R$120</div>
+</div>
+<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Troca%20de%20tela%20notebook%20-%20Valor:%20R$120" target="_blank">
+Agendar Serviço
+</a>
+</div>
+
+<div class="service">
+<div class="service-info">
+<h2>Montagem de computador</h2>
+<div class="price">R$150</div>
+</div>
+<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Montagem%20de%20computador%20-%20Valor:%20R$150" target="_blank">
+Agendar Serviço
+</a>
+</div>
+
+<div class="service">
+<div class="service-info">
+<h2>Formatação</h2>
+<div class="price">R$80</div>
+</div>
+<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Formatação%20-%20Valor:%20R$80" target="_blank">
+Agendar Serviço
+</a>
+</div>
+
+</div>
+
+<div class="info">
+<p>⚡ Pra dar aquela turbinada na sua máquina será feito um orçamento por <strong>R$20</strong>.</p>
+<p>✅ O valor só é descontado após aceito o orçamento.</p>
+<p>🚗 Busco a domicílio com uma taxa <strong>R$20</strong>.</p>
+</div>
+
+<div class="obs">
+<strong>Obs:</strong>
+As peças são por conta do cliente, com garantia de 90 dias de acordo com o código do consumidor Artigo 26, inciso II.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="table-title">
+CENTRAL DE ORDEM DE SERVIÇO
+</h2>
+
+<input type="text" id="cliente" placeholder="Nome do Cliente">
+<input type="text" id="telefone" placeholder="Telefone do Cliente">
+<input type="text" id="equipamento" placeholder="Equipamento">
+<textarea id="defeito" placeholder="Defeito Relatado"></textarea>
+
+<select id="valor">
+<option value="">Selecione o Serviço</option>
+<option value="Troca de teclado notebook - R$120">Troca de teclado notebook - R$120</option>
+<option value="Troca de tela notebook - R$120">Troca de tela notebook - R$120</option>
+<option value="Montagem de computador - R$150">Montagem de computador - R$150</option>
+<option value="Formatação - R$80">Formatação - R$80</option>
+<option value="Formatação com backup - R$120">Formatação com backup - R$120</option>
+<option value="Limpeza com organização de cabos - R$80">Limpeza com organização de cabos - R$80</option>
+<option value="Orçamento técnico - R$20">Orçamento técnico - R$20</option>
+</select>
+
+<input type="text" id="endereco" placeholder="Endereço para Uber Entrega">
+
+<div class="actions-os">
+<button onclick="gerarOS()" class="whatsapp-btn">GERAR OS</button>
+<button onclick="baixarPDF()" class="whatsapp-btn">EXPORTAR PDF</button>
+<button onclick="enviarWhatsapp()" class="whatsapp-btn">WHATSAPP</button>
+<button onclick="abrirUber()" class="whatsapp-btn">UBER ENTREGA</button>
+</div>
+
+<div id="resultadoOS"></div>
+
+</div>
+
+<div class="footer">
+Atendimento rápido via WhatsApp • Garantia de 90 dias • Suporte Profissional
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+function resize(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+
+resize();
+window.addEventListener('resize', resize);
+
+const particles = [];
+const totalParticles = window.innerWidth < 768 ? 28 : 55;
+
+for(let i=0;i<totalParticles;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+radius:Math.random()*1.8,
+speedX:(Math.random()-.5)*0.15,
+speedY:(Math.random()-.5)*0.15,
+opacity:Math.random()*0.5
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+p.x += p.speedX;
+p.y += p.speedY;
+
+if(p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+if(p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+ctx.fillStyle = `rgba(0,229,255,${p.opacity})`;
+ctx.shadowBlur = 10;
+ctx.shadowColor = '#00e5ff';
+ctx.fill();
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener('load',()=>{
+setTimeout(()=>{
+document.getElementById('loader').style.opacity='0';
+setTimeout(()=>{
+document.getElementById('loader').style.display='none';
+},500);
+},1200);
+});
+
+function showToast(message){
+const toast = document.getElementById('toast');
+toast.innerText = message;
+toast.classList.add('show');
+setTimeout(()=>{
+toast.classList.remove('show');
+},3000);
+}
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt',(e)=>{
+e.preventDefault();
+deferredPrompt = e;
+
+const btn = document.createElement('button');
+btn.id = 'installApp';
+btn.className = 'whatsapp-btn';
+btn.innerText = 'INSTALAR APP';
+
+document.body.appendChild(btn);
+
+btn.addEventListener('click', async()=>{
+if(deferredPrompt){
+deferredPrompt.prompt();
+const { outcome } = await deferredPrompt.userChoice;
+if(outcome === 'accepted'){
+showToast('APP INSTALADO');
+}
+deferredPrompt = null;
+btn.remove();
+}
+});
+});
+
+document.getElementById('telefone').addEventListener('input',(e)=>{
+let v = e.target.value.replace(/\D/g,'');
+v = v.replace(/^(\d{2})(\d)/g,'($1) $2');
+v = v.replace(/(\d{5})(\d)/,'$1-$2');
+e.target.value = v;
+});
+
+let dadosOS = {};
+
+function gerarOS(){
+
+const cliente = document.getElementById('cliente').value.trim();
+const telefone = document.getElementById('telefone').value.trim();
+const equipamento = document.getElementById('equipamento').value.trim();
+const defeito = document.getElementById('defeito').value.trim();
+const valor = document.getElementById('valor').value;
+const endereco = document.getElementById('endereco').value.trim();
+
+if(!cliente || !telefone || !equipamento || !defeito || !valor){
+showToast('PREENCHA TODOS OS CAMPOS');
+return;
+}
+
+const numeroOS = Math.floor(Math.random()*999999);
+const data = new Date().toLocaleDateString('pt-BR');
+
+dadosOS = {
+numeroOS,
+cliente,
+telefone,
+equipamento,
+defeito,
+valor,
+endereco,
+data
+};
+
+document.getElementById('resultadoOS').style.display='block';
+
+document.getElementById('resultadoOS').innerHTML = `
+<div class="os-title">
+ORDEM DE SERVIÇO Nº ${numeroOS}
+</div>
+
+<div class="os-box"><strong>Cliente:</strong> ${cliente}</div>
+<div class="os-box"><strong>Telefone:</strong> ${telefone}</div>
+<div class="os-box"><strong>Equipamento:</strong> ${equipamento}</div>
+<div class="os-box"><strong>Defeito:</strong><br>${defeito}</div>
+<div class="os-box"><strong>Serviço:</strong><br>${valor}</div>
+<div class="os-box"><strong>Data:</strong> ${data}</div>
+<div class="os-box"><strong>Status:</strong> <span class="status">EM ANÁLISE</span></div>
+`;
+
+salvarLocal();
+renderHistorico();
+showToast('OS GERADA COM SUCESSO');
+}
+
+function enviarWhatsapp(){
+if(!dadosOS.numeroOS){
+showToast('GERE UMA OS');
+return;
+}
+
+const mensagem = `
+📋 RENAN TECH PREMIUM
+
+🆔 OS: ${dadosOS.numeroOS}
+👤 Cliente: ${dadosOS.cliente}
+📞 Telefone: ${dadosOS.telefone}
+💻 Equipamento: ${dadosOS.equipamento}
+⚠ Defeito: ${dadosOS.defeito}
+🛠 Serviço: ${dadosOS.valor}
+📅 Data: ${dadosOS.data}
+`;
+
+window.open(`https://wa.me/5531992372280?text=${encodeURIComponent(mensagem)}`,'_blank');
+}
+
+function abrirUber(){
+if(!dadosOS.endereco){
+showToast('DIGITE O ENDEREÇO');
+return;
+}
+
+window.open(`https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${encodeURIComponent(dadosOS.endereco)}`,'_blank');
+}
+
+async function baixarPDF(){
+
+if(!dadosOS.numeroOS){
+showToast('GERE UMA OS');
+return;
+}
+
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+
+doc.setDrawColor(0,229,255);
+doc.rect(10,10,190,270);
+
+doc.setFontSize(22);
+doc.text('RENAN TECH PREMIUM',20,25);
+
+doc.setFontSize(14);
+doc.text(`OS Nº ${dadosOS.numeroOS}`,20,45);
+
+doc.setFontSize(11);
+doc.text(`Cliente: ${dadosOS.cliente}`,20,65);
+doc.text(`Telefone: ${dadosOS.telefone}`,20,80);
+doc.text(`Equipamento: ${dadosOS.equipamento}`,20,95);
+doc.text(`Defeito: ${dadosOS.defeito}`,20,115);
+doc.text(`Serviço: ${dadosOS.valor}`,20,140);
+doc.text(`Data: ${dadosOS.data}`,20,160);
+doc.text('Garantia de 90 dias conforme CDC',20,220);
+
+doc.save(`OS-${dadosOS.numeroOS}.pdf`);
+
+showToast('PDF EXPORTADO');
+}
+
+function salvarLocal(){
+let historico = JSON.parse(localStorage.getItem('osRenan')) || [];
+historico.push(dadosOS);
+localStorage.setItem('osRenan',JSON.stringify(historico));
+}
+
+function renderHistorico(){
+let historico = JSON.parse(localStorage.getItem('osRenan')) || [];
+let html = '';
+
+historico.reverse().slice(0,5).forEach(os=>{
+html += `
+<div class="history-card">
+<strong>OS:</strong> ${os.numeroOS}<br>
+<strong>Cliente:</strong> ${os.cliente}<br>
+<strong>Serviço:</strong> ${os.valor}<br>
+<strong>Data:</strong> ${os.data}
+</div>
+`;
+});
+
+document.getElementById('resultadoOS').innerHTML += html;
+}
+
+renderHistorico();
+
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('service-worker.js');
+navigator.serviceWorker.addEventListener('controllerchange',()=>{
+window.location.reload();
+});
+}
+
+</script>
+
+</body>
 </html>
