@@ -517,11 +517,15 @@ button{
 
         </div>
 
-<!-- SISTEMA DE ORDEM DE SERVIÇO -->
+<!-- ========================= -->
+<!-- SISTEMA PREMIUM RENAN TECH -->
+<!-- ========================= -->
 
-<div class="card" style="margin-top:30px;">
+<div class="card" style="margin-top:35px;">
 
-<h2 class="table-title">Gerar Ordem de Serviço</h2>
+<h2 class="table-title">
+CENTRAL DE ORDEM DE SERVIÇO
+</h2>
 
 <div class="services">
 
@@ -529,53 +533,38 @@ button{
 
 <div class="service-info" style="width:100%;">
 
-<input type="text" id="cliente" placeholder="Nome do Cliente"
-style="
-width:100%;
-padding:15px;
-border-radius:15px;
-background:rgba(255,255,255,.05);
-color:#fff;
-margin-bottom:15px;
-border:1px solid rgba(0,229,255,.2);
-">
+<input type="text" id="cliente" placeholder="Nome do Cliente">
 
-<input type="text" id="equipamento" placeholder="Equipamento"
-style="
-width:100%;
-padding:15px;
-border-radius:15px;
-background:rgba(255,255,255,.05);
-color:#fff;
-margin-bottom:15px;
-border:1px solid rgba(0,229,255,.2);
-">
+<input type="text" id="telefone" placeholder="Telefone do Cliente">
 
-<textarea id="defeito" placeholder="Defeito relatado"
-style="
-width:100%;
-padding:15px;
-border-radius:15px;
-background:rgba(255,255,255,.05);
-color:#fff;
-height:120px;
-margin-bottom:15px;
-border:1px solid rgba(0,229,255,.2);
-"></textarea>
+<input type="text" id="equipamento" placeholder="Equipamento">
 
-<input type="number" id="valor" placeholder="Valor do Serviço"
-style="
-width:100%;
-padding:15px;
-border-radius:15px;
-background:rgba(255,255,255,.05);
-color:#fff;
-margin-bottom:15px;
-border:1px solid rgba(0,229,255,.2);
-">
+<input type="text" id="marca" placeholder="Marca / Modelo">
 
-<button onclick="gerarOS()" class="whatsapp-btn" style="width:100%;">
-GERAR ORDEM DE SERVIÇO
+<textarea id="defeito" placeholder="Defeito Relatado"></textarea>
+
+<textarea id="observacoes" placeholder="Observações Técnicas"></textarea>
+
+<input type="number" id="valor" placeholder="Valor do Serviço">
+
+<input type="text" id="endereco" placeholder="Endereço para Uber Entrega">
+
+<div class="actions-os">
+
+<button onclick="gerarOS()" class="whatsapp-btn">
+GERAR OS
+</button>
+
+<button onclick="baixarPDF()" class="whatsapp-btn">
+EXPORTAR PDF
+</button>
+
+<button onclick="enviarWhatsapp()" class="whatsapp-btn">
+WHATSAPP
+</button>
+
+<button onclick="abrirUber()" class="whatsapp-btn">
+UBER ENTREGA
 </button>
 
 </div>
@@ -584,89 +573,307 @@ GERAR ORDEM DE SERVIÇO
 
 </div>
 
-<div id="resultadoOS"
-style="
-display:none;
-margin-top:25px;
-padding:20px;
-border-radius:20px;
+</div>
+
+<div id="resultadoOS"></div>
+
+</div>
+
+<style>
+
+#cliente,
+#telefone,
+#equipamento,
+#marca,
+#valor,
+#endereco,
+#defeito,
+#observacoes{
+
+width:100%;
+padding:16px;
+margin-bottom:15px;
+
+border-radius:18px;
+
 background:rgba(255,255,255,.05);
-border:1px solid rgba(0,229,255,.2);
+
+border:1px solid rgba(0,229,255,.15);
+
+color:#fff;
+
+font-size:15px;
+
 font-family:'Orbitron',sans-serif;
+
+}
+
+#defeito,
+#observacoes{
+height:120px;
+resize:none;
+}
+
+.actions-os{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+#resultadoOS{
+
+display:none;
+
+margin-top:25px;
+
+padding:25px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(0,229,255,.15);
+
 line-height:2;
-">
-</div>
 
-</div>
-            <strong>Obs:</strong>
-            As peças são por conta do cliente, com garantia de 90 dias de acordo com o código do consumidor Artigo 26, inciso II.
-        </div>
+font-family:'Orbitron',sans-serif;
 
-    </div>
+animation:serviceBlink 2s infinite alternate;
 
-    <div class="footer">
-        Atendimento rápido via WhatsApp • Garantia de 90 dias • Suporte Profissional
-    </div>
+}
 
-</div>
+.os-title{
+
+font-size:1.7rem;
+
+color:#00e5ff;
+
+margin-bottom:20px;
+
+text-align:center;
+
+text-shadow:
+0 0 10px rgba(0,229,255,.6);
+
+}
+
+.os-box{
+
+padding:15px;
+
+margin-bottom:12px;
+
+border-radius:15px;
+
+background:rgba(255,255,255,.03);
+
+}
+
+@media(max-width:768px){
+
+.actions-os{
+flex-direction:column;
+}
+
+.actions-os .whatsapp-btn{
+width:100%;
+}
+
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+let dadosOS = {};
 
-function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+function gerarOS(){
+
+const cliente = document.getElementById('cliente').value;
+const telefone = document.getElementById('telefone').value;
+const equipamento = document.getElementById('equipamento').value;
+const defeito = document.getElementById('defeito').value;
+const valor = document.getElementById('valor').value;
+const endereco = document.getElementById('endereco').value;
+
+const numeroOS = Math.floor(Math.random() * 999999);
+
+const data = new Date().toLocaleDateString('pt-BR');
+
+dadosOS = {
+numeroOS,
+cliente,
+telefone,
+equipamento,
+marca,
+defeito,
+observacoes,
+valor,
+endereco,
+data
+};
+
+document.getElementById('resultadoOS').style.display = 'block';
+
+document.getElementById('resultadoOS').innerHTML = `
+
+<div class="os-title">
+ORDEM DE SERVIÇO Nº ${numeroOS}
+</div>
+
+<div class="os-box">
+<strong>Cliente:</strong> ${cliente}
+</div>
+
+<div class="os-box">
+<strong>Telefone:</strong> ${telefone}
+</div>
+
+<div class="os-box">
+<strong>Equipamento:</strong> ${equipamento}
+</div>
+
+<div class="os-box">
+<strong>Marca/Modelo:</strong> ${marca}
+</div>
+
+<div class="os-box">
+<strong>Defeito:</strong><br>
+${defeito}
+</div>
+
+<div class="os-box">
+<strong>Observações:</strong><br>
+${observacoes}
+</div>
+
+<div class="os-box">
+<strong>Valor:</strong> R$ ${valor}
+</div>
+
+<div class="os-box">
+<strong>Data:</strong> ${data}
+</div>
+
+<div class="os-box">
+<strong>Status:</strong> EM ANÁLISE
+</div>
+
+`;
+
+salvarLocal();
+
 }
 
-resize();
-window.addEventListener('resize', resize);
+function enviarWhatsapp(){
 
-const particles = [];
-const totalParticles = window.innerWidth < 768 ? 45 : 80;
+if(!dadosOS.numeroOS){
+alert('Gere uma OS primeiro');
+return;
+}
 
-for(let i = 0; i < totalParticles; i++){
+const mensagem = `
+📋 *RENAN TECH PREMIUM*
 
-    particles.push({
-        x:Math.random() * canvas.width,
-        y:Math.random() * canvas.height,
-        radius:Math.random() * 2.2,
-        speedX:(Math.random() - 0.5) * 0.25,
-        speedY:(Math.random() - 0.5) * 0.25,
-        opacity:Math.random() * 0.8
-    });
+🆔 OS: ${dadosOS.numeroOS}
+
+👤 Cliente: ${dadosOS.cliente}
+
+📞 Telefone: ${dadosOS.telefone}
+
+💻 Equipamento: ${dadosOS.equipamento}
+
+🖥 Marca: ${dadosOS.marca}
+
+⚠ Defeito:
+${dadosOS.defeito}
+
+🛠 Observações:
+${dadosOS.observacoes}
+
+💰 Valor: R$ ${dadosOS.valor}
+
+📅 Data: ${dadosOS.data}
+`;
+
+window.open(
+`https://wa.me/5531992372280?text=${encodeURIComponent(mensagem)}`,
+'_blank'
+);
 
 }
 
-function animate(){
+function abrirUber(){
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p => {
-
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if(p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-        if(p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-
-        ctx.fillStyle = `rgba(0,229,255,${p.opacity})`;
-
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#00e5ff';
-
-        ctx.fill();
-
-    });
-
-    requestAnimationFrame(animate);
+if(!dadosOS.endereco){
+alert('Digite o endereço');
+return;
 }
 
-animate();
+window.open(
+`https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${encodeURIComponent(dadosOS.endereco)}`,
+'_blank'
+);
+
+}
+
+async function baixarPDF(){
+
+if(!dadosOS.numeroOS){
+alert('Gere uma OS primeiro');
+return;
+}
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+doc.setFont('helvetica');
+
+doc.setFontSize(20);
+
+doc.text('RENAN TECH PREMIUM', 20, 20);
+
+doc.setFontSize(14);
+
+doc.text(`OS Nº ${dadosOS.numeroOS}`, 20, 35);
+
+doc.setFontSize(11);
+
+doc.text(`Cliente: ${dadosOS.cliente}`, 20, 50);
+
+doc.text(`Telefone: ${dadosOS.telefone}`, 20, 60);
+
+doc.text(`Equipamento: ${dadosOS.equipamento}`, 20, 70);
+
+doc.text(`Marca: ${dadosOS.marca}`, 20, 80);
+
+doc.text(`Defeito: ${dadosOS.defeito}`, 20, 95);
+
+doc.text(`Observações: ${dadosOS.observacoes}`, 20, 120);
+
+doc.text(`Valor: R$ ${dadosOS.valor}`, 20, 145);
+
+doc.text(`Data: ${dadosOS.data}`, 20, 155);
+
+doc.text('Garantia de 90 dias conforme CDC Art. 26 inciso II', 20, 180);
+
+doc.save(`OS-${dadosOS.numeroOS}.pdf`);
+
+}
+
+function salvarLocal(){
+
+let historico = JSON.parse(localStorage.getItem('osRenan')) || [];
+
+historico.push(dadosOS);
+
+localStorage.setItem('osRenan', JSON.stringify(historico));
+
+}
 
 </script>
 
