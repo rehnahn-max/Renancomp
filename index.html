@@ -517,23 +517,87 @@ button{
 
         </div>
 
-        <div class="info">
+<!-- SISTEMA DE ORDEM DE SERVIÇO -->
 
-            <p>
-                ⚡ Pra dar aquela turbinada na sua máquina será feito um orçamento por <strong>R$20</strong>.
-            </p>
+<div class="card" style="margin-top:30px;">
 
-            <p>
-                ✅ O valor só é descontado após aceito o orçamento.
-            </p>
+<h2 class="table-title">Gerar Ordem de Serviço</h2>
 
-            <p>
-             🚗 Busco a domicílio com uma taxa <strong>R$20</strong> dependendo da localidade.
-            </p>
+<div class="services">
 
-        </div>
+<div class="service">
 
-        <div class="obs">
+<div class="service-info" style="width:100%;">
+
+<input type="text" id="cliente" placeholder="Nome do Cliente"
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+background:rgba(255,255,255,.05);
+color:#fff;
+margin-bottom:15px;
+border:1px solid rgba(0,229,255,.2);
+">
+
+<input type="text" id="equipamento" placeholder="Equipamento"
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+background:rgba(255,255,255,.05);
+color:#fff;
+margin-bottom:15px;
+border:1px solid rgba(0,229,255,.2);
+">
+
+<textarea id="defeito" placeholder="Defeito relatado"
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+background:rgba(255,255,255,.05);
+color:#fff;
+height:120px;
+margin-bottom:15px;
+border:1px solid rgba(0,229,255,.2);
+"></textarea>
+
+<input type="number" id="valor" placeholder="Valor do Serviço"
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+background:rgba(255,255,255,.05);
+color:#fff;
+margin-bottom:15px;
+border:1px solid rgba(0,229,255,.2);
+">
+
+<button onclick="gerarOS()" class="whatsapp-btn" style="width:100%;">
+GERAR ORDEM DE SERVIÇO
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="resultadoOS"
+style="
+display:none;
+margin-top:25px;
+padding:20px;
+border-radius:20px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(0,229,255,.2);
+font-family:'Orbitron',sans-serif;
+line-height:2;
+">
+</div>
+
+</div>
             <strong>Obs:</strong>
             As peças são por conta do cliente, com garantia de 90 dias de acordo com o código do consumidor Artigo 26, inciso II.
         </div>
