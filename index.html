@@ -1,318 +1,145 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<meta name="theme-color" content="#050816" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="format-detection" content="telephone=no" />
-<meta name="mobile-web-app-capable" content="yes">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050816">
 
-<title>Assistência Técnica Premium</title>
+<title>Renan Tech Premium</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
-    --primary:#00e5ff;
-    --secondary:#0077ff;
-    --bg:#050816;
+--primary:#00e5ff;
+--secondary:#0077ff;
+--bg:#050816;
 }
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    min-height:100vh;
-    overflow-x:hidden;
-    font-family:'Rajdhani',sans-serif;
-    background:var(--bg);
-    color:#fff;
-    position:relative;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    -webkit-tap-highlight-color:transparent;
+background:var(--bg);
+font-family:'Rajdhani',sans-serif;
+color:white;
+overflow-x:hidden;
+min-height:100vh;
 }
 
 .background{
-    position:fixed;
-    inset:0;
-
-    background:
-    linear-gradient(rgba(2,3,10,.60), rgba(5,8,22,.75)),
-    url('Fundo.jpg') center center/cover no-repeat;
-
-    transform:scale(1.02);
-
-    z-index:-5;
-}
-
-.background::after{
-    content:'';
-    position:absolute;
-    inset:0;
-
-    background:
-    radial-gradient(circle at top, rgba(0,229,255,.18), transparent 40%),
-    radial-gradient(circle at bottom, rgba(0,119,255,.15), transparent 40%);
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(5,8,22,.85),rgba(5,8,22,.92)),
+url('Fundo.jpg') center center/cover no-repeat;
+z-index:-3;
 }
 
 canvas{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:-4;
-    pointer-events:none;
+position:fixed;
+inset:0;
+z-index:-2;
+pointer-events:none;
 }
 
 .container{
-    width:min(95%, 980px);
-    margin:auto;
-    padding:35px 15px 80px;
-    position:relative;
-    z-index:2;
+width:min(95%,1100px);
+margin:auto;
+padding:35px 15px 100px;
 }
 
 .hero{
-    text-align:center;
-    margin-bottom:40px;
+text-align:center;
+padding:50px 20px;
+margin-bottom:40px;
 }
 
 .hero h1{
-    font-family:'Orbitron',sans-serif;
-    font-size:clamp(2.3rem,6vw,4.5rem);
-    color:var(--primary);
-    letter-spacing:3px;
-
-    text-shadow:
-    0 0 8px rgba(0,229,255,.8),
-    0 0 25px rgba(0,229,255,.45),
-    0 0 50px rgba(0,229,255,.2);
-
-    animation:neonPulse 2.2s ease-in-out infinite alternate;
-}
-
-@keyframes neonPulse{
-
-    from{
-        opacity:.92;
-        transform:translateY(0px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(-2px);
-    }
-
+font-family:'Orbitron',sans-serif;
+font-size:clamp(2.5rem,7vw,5rem);
+color:var(--primary);
+text-shadow:
+0 0 10px rgba(0,229,255,.8),
+0 0 30px rgba(0,229,255,.4);
 }
 
 .hero p{
-    margin-top:12px;
-    font-size:clamp(1rem,2vw,1.3rem);
-    color:#fff;
-    font-family:'Orbitron',sans-serif;
-    letter-spacing:2px;
-    opacity:.92;
+margin-top:15px;
+font-size:1.2rem;
+letter-spacing:2px;
 }
 
 .card{
-    background:rgba(255,255,255,.06);
-
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:30px;
-
-    padding:28px;
-
-    box-shadow:
-    0 0 25px rgba(0,229,255,.10),
-    0 0 60px rgba(0,119,255,.08);
-
-    margin-bottom:35px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:30px;
+padding:28px;
+margin-bottom:30px;
+box-shadow:0 0 30px rgba(0,229,255,.08);
 }
 
-.table-title{
-    text-align:center;
-    font-family:'Orbitron',sans-serif;
-    font-size:clamp(1.5rem,3vw,2.2rem);
-    margin-bottom:28px;
-    color:var(--primary);
-    letter-spacing:2px;
+.title{
+font-family:'Orbitron',sans-serif;
+text-align:center;
+font-size:2rem;
+margin-bottom:25px;
+color:var(--primary);
 }
 
 .services{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
 }
 
 .service{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-
-    padding:22px;
-
-    border-radius:24px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(0,229,255,.12);
-
-    transition:.25s ease;
-
-    flex-wrap:wrap;
-
-    animation:serviceBlink 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes serviceBlink{
-
-    from{
-        box-shadow:0 0 10px rgba(0,229,255,.08);
-    }
-
-    to{
-        box-shadow:
-        0 0 20px rgba(0,229,255,.18),
-        0 0 40px rgba(0,119,255,.08);
-    }
-
+background:rgba(255,255,255,.04);
+border:1px solid rgba(0,229,255,.12);
+border-radius:25px;
+padding:22px;
+transition:.3s;
 }
 
 .service:hover{
-    transform:translateY(-4px);
-
-    background:rgba(0,229,255,.08);
-}
-
-.service-info h2{
-    font-size:1.15rem;
-    margin-bottom:8px;
-    color:#fff;
+transform:translateY(-5px);
 }
 
 .price{
-    color:var(--primary);
-    font-size:1.4rem;
-    font-weight:700;
-    font-family:'Orbitron',sans-serif;
+font-size:1.5rem;
+font-family:'Orbitron',sans-serif;
+color:var(--primary);
+margin:15px 0;
 }
 
-.whatsapp-btn{
-
-    text-decoration:none;
-
-    background:linear-gradient(45deg,var(--primary),var(--secondary));
-
-    color:#fff;
-
-    padding:14px 22px;
-
-    border-radius:16px;
-
-    font-weight:700;
-
-    transition:.25s ease;
-
-    white-space:nowrap;
-
-    font-family:'Orbitron',sans-serif;
-
-    font-size:.9rem;
-
-    min-height:48px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:none;
-
-    cursor:pointer;
+.btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:18px;
+background:linear-gradient(45deg,var(--primary),var(--secondary));
+color:#fff;
+font-family:'Orbitron',sans-serif;
+font-weight:bold;
+font-size:.95rem;
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:.3s;
 }
 
-.whatsapp-btn:hover{
-
-    transform:translateY(-2px);
-}
-
-.info{
-    margin-top:30px;
-
-    padding:24px;
-
-    border-radius:24px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(0,229,255,.12);
-
-    font-family:'Orbitron',sans-serif;
-
-    line-height:1.9;
-}
-
-.info p{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-
-    margin-bottom:14px;
-
-    padding:14px;
-
-    border-radius:16px;
-
-    background:rgba(255,255,255,.03);
-}
-
-.obs{
-    margin-top:25px;
-
-    padding:20px;
-
-    border-radius:22px;
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    text-align:center;
-
-    line-height:1.9;
-
-    font-size:.95rem;
-}
-
-.footer{
-    margin-top:38px;
-    text-align:center;
-    color:#d0d0d0;
-    font-size:1rem;
-    letter-spacing:1px;
+.btn:hover{
+transform:scale(1.02);
 }
 
 input,
@@ -324,14 +151,9 @@ margin-bottom:15px;
 border-radius:18px;
 background:rgba(255,255,255,.05);
 border:1px solid rgba(0,229,255,.15);
-color:#fff;
+color:white;
 font-size:15px;
-font-family:'Orbitron',sans-serif;
 outline:none;
-}
-
-select option{
-background:#050816;
 }
 
 textarea{
@@ -339,10 +161,14 @@ height:120px;
 resize:none;
 }
 
-.actions-os{
-display:flex;
+select option{
+background:#050816;
+}
+
+.actions{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
-flex-wrap:wrap;
 margin-top:10px;
 }
 
@@ -351,86 +177,50 @@ display:none;
 margin-top:25px;
 padding:25px;
 border-radius:25px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(0,229,255,.15);
+background:rgba(255,255,255,.04);
+border:1px solid rgba(0,229,255,.12);
 line-height:2;
-font-family:'Orbitron',sans-serif;
 }
 
 .os-title{
-font-size:1.7rem;
-color:#00e5ff;
-margin-bottom:20px;
+font-family:'Orbitron',sans-serif;
+font-size:1.5rem;
 text-align:center;
+margin-bottom:20px;
+color:var(--primary);
 }
 
 .os-box{
-padding:15px;
+padding:14px;
 margin-bottom:12px;
-border-radius:15px;
+border-radius:16px;
 background:rgba(255,255,255,.03);
 }
 
 .status{
-color:#00e5ff;
+color:#00ff88;
 font-weight:bold;
 }
 
-.history-card{
-margin-top:20px;
-padding:18px;
-border-radius:20px;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(0,229,255,.15);
-}
-
-#loader{
-position:fixed;
-inset:0;
-background:#050816;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:999999;
-transition:opacity .5s ease;
-}
-
-.loader-ring{
-width:90px;
-height:90px;
-border-radius:50%;
-border:4px solid rgba(255,255,255,.1);
-border-top:4px solid #00e5ff;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
-
-.loader-text{
-margin-top:25px;
-font-family:'Orbitron',sans-serif;
-letter-spacing:3px;
-color:#00e5ff;
+.footer{
+text-align:center;
+margin-top:40px;
+line-height:1.8;
+color:#ccc;
 }
 
 .toast{
 position:fixed;
-bottom:30px;
-right:30px;
-padding:16px 22px;
-background:rgba(0,229,255,.12);
-border:1px solid rgba(0,229,255,.3);
-backdrop-filter:blur(10px);
+bottom:25px;
+right:25px;
+padding:16px 20px;
 border-radius:18px;
-font-family:'Orbitron',sans-serif;
-color:#fff;
-z-index:99999;
+background:rgba(0,229,255,.14);
+backdrop-filter:blur(10px);
 opacity:0;
 transform:translateY(20px);
-transition:.35s ease;
+transition:.3s;
+z-index:9999;
 }
 
 .toast.show{
@@ -438,32 +228,14 @@ opacity:1;
 transform:translateY(0);
 }
 
-#installApp{
-position:fixed;
-bottom:25px;
-left:25px;
-z-index:9999;
-}
-
 @media(max-width:768px){
 
-.container{
-width:100%;
-padding:22px 14px 60px;
+.hero{
+padding:20px 0;
 }
 
-.service{
-flex-direction:column;
-align-items:flex-start;
-}
-
-.actions-os{
-flex-direction:column;
-}
-
-.actions-os .whatsapp-btn,
-.whatsapp-btn{
-width:100%;
+.card{
+padding:20px;
 }
 
 }
@@ -472,109 +244,168 @@ width:100%;
 </head>
 <body>
 
-<div id="loader">
-<div class="loader-ring"></div>
-<div class="loader-text">
-RENAN TECH PREMIUM
-</div>
-</div>
-
-<div id="toast" class="toast"></div>
-
 <div class="background"></div>
 
 <canvas id="particles"></canvas>
 
+<div class="toast" id="toast"></div>
+
 <div class="container">
 
-<div class="hero">
+<section class="hero">
+
 <h1>RENAN TECH PREMIUM</h1>
+
 <p>Performance • Upgrade • Manutenção Profissional</p>
-</div>
 
-<div class="card">
+</section>
 
-<h2 class="table-title">Tabela de Preços</h2>
+<section class="card">
+
+<h2 class="title">Tabela de Preços</h2>
 
 <div class="services">
 
 <div class="service">
-<div class="service-info">
 <h2>Troca de teclado notebook</h2>
 <div class="price">R$120</div>
-</div>
-<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Troca%20de%20teclado%20notebook%20-%20Valor:%20R$120" target="_blank">
+
+<a class="btn" target="_blank"
+href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20troca%20de%20teclado">
 Agendar Serviço
 </a>
 </div>
 
 <div class="service">
-<div class="service-info">
 <h2>Troca de tela notebook</h2>
 <div class="price">R$120</div>
-</div>
-<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Troca%20de%20tela%20notebook%20-%20Valor:%20R$120" target="_blank">
+
+<a class="btn" target="_blank"
+href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20troca%20de%20tela">
 Agendar Serviço
 </a>
 </div>
 
 <div class="service">
-<div class="service-info">
-<h2>Montagem de computador</h2>
-<div class="price">R$150</div>
-</div>
-<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Montagem%20de%20computador%20-%20Valor:%20R$150" target="_blank">
-Agendar Serviço
-</a>
-</div>
-
-<div class="service">
-<div class="service-info">
-<h2>Formatação</h2>
+<h2>Formatação Completa</h2>
 <div class="price">R$80</div>
-</div>
-<a class="whatsapp-btn" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20Formatação%20-%20Valor:%20R$80" target="_blank">
+
+<a class="btn" target="_blank"
+href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20formatação">
 Agendar Serviço
 </a>
 </div>
 
-<div class="card">
+<div class="service">
+<h2>Montagem Gamer</h2>
+<div class="price">R$150</div>
 
-<h2 class="table-title">
-CENTRAL DE ORDEM DE SERVIÇO
-</h2>
+<a class="btn" target="_blank"
+href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20montagem">
+Agendar Serviço
+</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h2 class="title">Central de Ordem de Serviço</h2>
 
 <input type="text" id="cliente" placeholder="Nome do Cliente">
-<input type="text" id="telefone" placeholder="Telefone do Cliente">
+
+<input type="text" id="telefone" placeholder="Telefone">
+
+<input type="text" id="endereco" placeholder="Endereço Completo">
+
 <input type="text" id="equipamento" placeholder="Equipamento">
+
 <textarea id="defeito" placeholder="Defeito Relatado"></textarea>
 
 <select id="valor">
+
 <option value="">Selecione o Serviço</option>
-<option value="Troca de teclado notebook - R$120">Troca de teclado notebook - R$120</option>
-<option value="Troca de tela notebook - R$120">Troca de tela notebook - R$120</option>
-<option value="Montagem de computador - R$150">Montagem de computador - R$150</option>
-<option value="Formatação - R$80">Formatação - R$80</option>
-<option value="Formatação com backup - R$120">Formatação com backup - R$120</option>
-<option value="Limpeza com organização de cabos - R$80">Limpeza com organização de cabos - R$80</option>
-<option value="Orçamento técnico - R$20">Orçamento técnico - R$20</option>
+
+<option value="Orçamento - R$20">
+Orçamento - R$20
+</option>
+
+<option value="Troca de teclado notebook - R$120">
+Troca de teclado notebook - R$120
+</option>
+
+<option value="Troca de tela notebook - R$120">
+Troca de tela notebook - R$120
+</option>
+
+<option value="Formatação Completa - R$80">
+Formatação Completa - R$80
+</option>
+
+<option value="Montagem Gamer - R$150">
+Montagem Gamer - R$150
+</option>
+
 </select>
 
-<input type="text" id="endereco" placeholder="Endereço para Uber Entrega">
+<div class="actions">
 
-<div class="actions-os">
-<button onclick="gerarOS()" class="whatsapp-btn">GERAR OS</button>
-<button onclick="baixarPDF()" class="whatsapp-btn">EXPORTAR PDF</button>
-<button onclick="enviarWhatsapp()" class="whatsapp-btn">WHATSAPP</button>
-<button onclick="abrirUber()" class="whatsapp-btn">UBER ENTREGA</button>
+<button class="btn" onclick="gerarOS()">
+GERAR OS
+</button>
+
+<button class="btn" onclick="abrirMapa()">
+ABRIR NO MAPA
+</button>
+
 </div>
 
 <div id="resultadoOS"></div>
 
-</div>
+</section>
+
+<section class="card">
+
+<h2 class="title">Status do Serviço</h2>
+
+<input type="text" id="clienteNome" placeholder="Nome do Cliente">
+
+<input type="text" id="clienteNumero" placeholder="WhatsApp Cliente">
+
+<select id="statusServico">
+
+<option value="🔎 Avaliando Serviço">
+🔎 Avaliando Serviço
+</option>
+
+<option value="🛠 Trabalhando">
+🛠 Trabalhando
+</option>
+
+<option value="✅ Serviço Efetuado">
+✅ Serviço Efetuado
+</option>
+
+</select>
+
+<button class="btn" onclick="enviarStatus()">
+ENVIAR STATUS
+</button>
+
+</section>
 
 <div class="footer">
-Atendimento rápido via WhatsApp • Garantia de 90 dias • Suporte Profissional
+
+<p>
+Garantia de 90 dias conforme CDC Artigo 26
+</p>
+
+<p>
+Atendimento rápido via WhatsApp
+</p>
+
 </div>
 
 </div>
@@ -584,257 +415,301 @@ Atendimento rápido via WhatsApp • Garantia de 90 dias • Suporte Profissiona
 <script>
 
 const canvas = document.getElementById('particles');
+
 const ctx = canvas.getContext('2d');
 
 function resize(){
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+canvas.width = innerWidth;
+
+canvas.height = innerHeight;
+
 }
 
 resize();
-window.addEventListener('resize', resize);
 
-const particles = [];
-const totalParticles = window.innerWidth < 768 ? 28 : 55;
+addEventListener('resize',resize);
 
-for(let i=0;i<totalParticles;i++){
+const particles=[];
+
+for(let i=0;i<60;i++){
+
 particles.push({
+
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-radius:Math.random()*1.8,
-speedX:(Math.random()-.5)*0.15,
-speedY:(Math.random()-.5)*0.15,
-opacity:Math.random()*0.5
+radius:Math.random()*2,
+sx:(Math.random()-.5)*0.2,
+sy:(Math.random()-.5)*0.2,
+op:Math.random()*0.5
+
 });
+
 }
 
 function animate(){
+
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 particles.forEach(p=>{
-p.x += p.speedX;
-p.y += p.speedY;
 
-if(p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-if(p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+p.x+=p.sx;
+p.y+=p.sy;
+
+if(p.x<0||p.x>canvas.width)p.sx*=-1;
+
+if(p.y<0||p.y>canvas.height)p.sy*=-1;
 
 ctx.beginPath();
+
 ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-ctx.fillStyle = `rgba(0,229,255,${p.opacity})`;
-ctx.shadowBlur = 10;
-ctx.shadowColor = '#00e5ff';
+
+ctx.fillStyle=`rgba(0,229,255,${p.op})`;
+
+ctx.shadowBlur=10;
+
+ctx.shadowColor='#00e5ff';
+
 ctx.fill();
+
 });
 
 requestAnimationFrame(animate);
+
 }
 
 animate();
 
-window.addEventListener('load',()=>{
-setTimeout(()=>{
-document.getElementById('loader').style.opacity='0';
-setTimeout(()=>{
-document.getElementById('loader').style.display='none';
-},500);
-},1200);
-});
+function showToast(msg){
 
-function showToast(message){
-const toast = document.getElementById('toast');
-toast.innerText = message;
+const toast=document.getElementById('toast');
+
+toast.innerText=msg;
+
 toast.classList.add('show');
+
 setTimeout(()=>{
+
 toast.classList.remove('show');
+
 },3000);
+
 }
-
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt',(e)=>{
-e.preventDefault();
-deferredPrompt = e;
-
-const btn = document.createElement('button');
-btn.id = 'installApp';
-btn.className = 'whatsapp-btn';
-btn.innerText = 'INSTALAR APP';
-
-document.body.appendChild(btn);
-
-btn.addEventListener('click', async()=>{
-if(deferredPrompt){
-deferredPrompt.prompt();
-const { outcome } = await deferredPrompt.userChoice;
-if(outcome === 'accepted'){
-showToast('APP INSTALADO');
-}
-deferredPrompt = null;
-btn.remove();
-}
-});
-});
 
 document.getElementById('telefone').addEventListener('input',(e)=>{
-let v = e.target.value.replace(/\D/g,'');
-v = v.replace(/^(\d{2})(\d)/g,'($1) $2');
-v = v.replace(/(\d{5})(\d)/,'$1-$2');
-e.target.value = v;
+
+let v=e.target.value.replace(/\D/g,'');
+
+v=v.replace(/^(\d{2})(\d)/g,'($1) $2');
+
+v=v.replace(/(\d{5})(\d)/,'$1-$2');
+
+e.target.value=v;
+
 });
 
-let dadosOS = {};
+async function gerarOS(){
 
-function gerarOS(){
+const cliente=document.getElementById('cliente').value.trim();
 
-const cliente = document.getElementById('cliente').value.trim();
-const telefone = document.getElementById('telefone').value.trim();
-const equipamento = document.getElementById('equipamento').value.trim();
-const defeito = document.getElementById('defeito').value.trim();
-const valor = document.getElementById('valor').value;
-const endereco = document.getElementById('endereco').value.trim();
+const telefone=document.getElementById('telefone').value.trim();
 
-if(!cliente || !telefone || !equipamento || !defeito || !valor){
+const endereco=document.getElementById('endereco').value.trim();
+
+const equipamento=document.getElementById('equipamento').value.trim();
+
+const defeito=document.getElementById('defeito').value.trim();
+
+const valor=document.getElementById('valor').value;
+
+if(!cliente||!telefone||!endereco||!equipamento||!defeito||!valor){
+
 showToast('PREENCHA TODOS OS CAMPOS');
+
 return;
+
 }
 
-const numeroOS = Math.floor(Math.random()*999999);
-const data = new Date().toLocaleDateString('pt-BR');
+const numeroOS=Math.floor(Math.random()*999999);
 
-dadosOS = {
-numeroOS,
-cliente,
-telefone,
-equipamento,
-defeito,
-valor,
-endereco,
-data
-};
+const data=new Date().toLocaleDateString('pt-BR');
 
 document.getElementById('resultadoOS').style.display='block';
 
-document.getElementById('resultadoOS').innerHTML = `
+document.getElementById('resultadoOS').innerHTML=`
+
 <div class="os-title">
 ORDEM DE SERVIÇO Nº ${numeroOS}
 </div>
 
-<div class="os-box"><strong>Cliente:</strong> ${cliente}</div>
-<div class="os-box"><strong>Telefone:</strong> ${telefone}</div>
-<div class="os-box"><strong>Equipamento:</strong> ${equipamento}</div>
-<div class="os-box"><strong>Defeito:</strong><br>${defeito}</div>
-<div class="os-box"><strong>Serviço:</strong><br>${valor}</div>
-<div class="os-box"><strong>Data:</strong> ${data}</div>
-<div class="os-box"><strong>Status:</strong> <span class="status">EM ANÁLISE</span></div>
+<div class="os-box">
+<strong>Cliente:</strong> ${cliente}
+</div>
+
+<div class="os-box">
+<strong>Telefone:</strong> ${telefone}
+</div>
+
+<div class="os-box">
+<strong>Endereço:</strong> ${endereco}
+</div>
+
+<div class="os-box">
+<strong>Equipamento:</strong> ${equipamento}
+</div>
+
+<div class="os-box">
+<strong>Defeito:</strong> ${defeito}
+</div>
+
+<div class="os-box">
+<strong>Serviço:</strong> ${valor}
+</div>
+
+<div class="os-box">
+<strong>Data:</strong> ${data}
+</div>
+
+<div class="os-box">
+<strong>Status:</strong>
+<span class="status">EM ANÁLISE</span>
+</div>
+
 `;
-
-salvarLocal();
-renderHistorico();
-showToast('OS GERADA COM SUCESSO');
-}
-
-function enviarWhatsapp(){
-if(!dadosOS.numeroOS){
-showToast('GERE UMA OS');
-return;
-}
-
-const mensagem = `
-📋 RENAN TECH PREMIUM
-
-🆔 OS: ${dadosOS.numeroOS}
-👤 Cliente: ${dadosOS.cliente}
-📞 Telefone: ${dadosOS.telefone}
-💻 Equipamento: ${dadosOS.equipamento}
-⚠ Defeito: ${dadosOS.defeito}
-🛠 Serviço: ${dadosOS.valor}
-📅 Data: ${dadosOS.data}
-`;
-
-window.open(`https://wa.me/5531992372280?text=${encodeURIComponent(mensagem)}`,'_blank');
-}
-
-function abrirUber(){
-if(!dadosOS.endereco){
-showToast('DIGITE O ENDEREÇO');
-return;
-}
-
-window.open(`https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${encodeURIComponent(dadosOS.endereco)}`,'_blank');
-}
-
-async function baixarPDF(){
-
-if(!dadosOS.numeroOS){
-showToast('GERE UMA OS');
-return;
-}
 
 const { jsPDF } = window.jspdf;
+
 const doc = new jsPDF();
 
-doc.setDrawColor(0,229,255);
-doc.rect(10,10,190,270);
+doc.setFillColor(5,8,22);
+
+doc.rect(0,0,210,297,'F');
+
+doc.setTextColor(0,229,255);
 
 doc.setFontSize(22);
+
 doc.text('RENAN TECH PREMIUM',20,25);
 
-doc.setFontSize(14);
-doc.text(`OS Nº ${dadosOS.numeroOS}`,20,45);
+doc.setTextColor(255,255,255);
 
-doc.setFontSize(11);
-doc.text(`Cliente: ${dadosOS.cliente}`,20,65);
-doc.text(`Telefone: ${dadosOS.telefone}`,20,80);
-doc.text(`Equipamento: ${dadosOS.equipamento}`,20,95);
-doc.text(`Defeito: ${dadosOS.defeito}`,20,115);
-doc.text(`Serviço: ${dadosOS.valor}`,20,140);
-doc.text(`Data: ${dadosOS.data}`,20,160);
-doc.text('Garantia de 90 dias conforme CDC',20,220);
+doc.setFontSize(12);
 
-doc.save(`OS-${dadosOS.numeroOS}.pdf`);
+doc.text(`OS Nº ${numeroOS}`,20,45);
 
-showToast('PDF EXPORTADO');
+doc.text(`Cliente: ${cliente}`,20,65);
+
+doc.text(`Telefone: ${telefone}`,20,80);
+
+doc.text(`Endereço: ${endereco}`,20,95);
+
+doc.text(`Equipamento: ${equipamento}`,20,110);
+
+doc.text(`Defeito: ${defeito}`,20,130);
+
+doc.text(`Serviço: ${valor}`,20,150);
+
+doc.text(`Data: ${data}`,20,170);
+
+doc.save(`OS-${numeroOS}.pdf`);
+
+const mensagem=`📋 RENAN TECH PREMIUM
+
+🆔 OS: ${numeroOS}
+
+👤 Cliente: ${cliente}
+
+📞 Telefone: ${telefone}
+
+📍 Endereço: ${endereco}
+
+💻 Equipamento: ${equipamento}
+
+⚠ Defeito: ${defeito}
+
+🛠 Serviço: ${valor}
+
+📅 Data: ${data}`;
+
+window.open(
+
+`https://wa.me/5531992372280?text=${encodeURIComponent(mensagem)}`,
+
+'_blank'
+
+);
+
+showToast('OS GERADA COM SUCESSO');
+
 }
 
-function salvarLocal(){
-let historico = JSON.parse(localStorage.getItem('osRenan')) || [];
-historico.push(dadosOS);
-localStorage.setItem('osRenan',JSON.stringify(historico));
+function abrirMapa(){
+
+const endereco=document.getElementById('endereco').value.trim();
+
+if(!endereco){
+
+showToast('DIGITE O ENDEREÇO');
+
+return;
+
 }
 
-function renderHistorico(){
-let historico = JSON.parse(localStorage.getItem('osRenan')) || [];
-let html = '';
+window.open(
 
-historico.reverse().slice(0,5).forEach(os=>{
-html += `
-<div class="history-card">
-<strong>OS:</strong> ${os.numeroOS}<br>
-<strong>Cliente:</strong> ${os.cliente}<br>
-<strong>Serviço:</strong> ${os.valor}<br>
-<strong>Data:</strong> ${os.data}
-</div>
-`;
-});
+`https://www.google.com/maps/search/${encodeURIComponent(endereco)}`,
 
-document.getElementById('resultadoOS').innerHTML += html;
+'_blank'
+
+);
+
 }
 
-renderHistorico();
+function enviarStatus(){
 
-if ('serviceWorker' in navigator) {
+const nome=document.getElementById('clienteNome').value;
+
+const numero=document.getElementById('clienteNumero').value;
+
+const status=document.getElementById('statusServico').value;
+
+if(!nome||!numero){
+
+showToast('PREENCHA OS CAMPOS');
+
+return;
+
+}
+
+const mensagem=`Olá ${nome}! 👋
+
+Aqui é da Renan Tech Premium 🔧
+
+Seu aparelho está atualmente em status:
+
+${status}
+
+Obrigado pela preferência 🙏`;
+
+window.open(
+
+`https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`,
+
+'_blank'
+
+);
+
+showToast('STATUS ENVIADO');
+
+}
+
+if('serviceWorker' in navigator){
+
 navigator.serviceWorker.register('service-worker.js');
-navigator.serviceWorker.addEventListener('controllerchange',()=>{
-window.location.reload();
-});
+
 }
 
 </script>
-
-<div class="obs">
-<strong>Obs:</strong>
-As peças são por conta do cliente, com garantia de 90 dias de acordo com o código do consumidor Artigo 26, inciso II.
-</div>
 
 </body>
 </html>
