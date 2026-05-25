@@ -53,3 +53,26 @@
  cursor:pointer;
 
 }
+
+.senha-btn{
+
+width:auto;
+padding:8px 14px;
+font-size:.75rem;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:#aaa;
+cursor:pointer;
+margin:auto;
+display:block;
+transition:.3s;
+
+}
+
+.senha-btn:hover{
+
+background:rgba(0,229,255,.15);
+color:#00e5ff;
+
+}
