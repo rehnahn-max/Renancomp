@@ -1,0 +1,55 @@
+.os-box{
+
+ width:90%;
+ max-width:500px;
+ margin:30px auto;
+ background:rgba(255,255,255,0.08);
+ backdrop-filter:blur(10px);
+ padding:25px;
+ border-radius:20px;
+ display:flex;
+ flex-direction:column;
+ gap:15px;
+ box-shadow:0 0 25px rgba(0,140,255,0.3);
+
+}
+
+.os-box h2{
+
+ color:#00aaff;
+ text-align:center;
+
+}
+
+.os-box input,
+.os-box textarea{
+
+ padding:14px;
+ border:none;
+ border-radius:12px;
+ background:#111;
+ color:white;
+ font-size:16px;
+ outline:none;
+
+}
+
+.os-box textarea{
+
+ min-height:100px;
+ resize:none;
+
+}
+
+.os-box button{
+
+ padding:15px;
+ border:none;
+ border-radius:12px;
+ background:linear-gradient(45deg,#0088ff,#00ccff);
+ color:white;
+ font-size:17px;
+ font-weight:bold;
+ cursor:pointer;
+
+}
