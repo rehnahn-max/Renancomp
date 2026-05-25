@@ -370,9 +370,34 @@ ABRIR NO MAPA
 
 <h2 class="title">Status do Serviço</h2>
 
-<input type="text" id="clienteNome" placeholder="Nome do Cliente">
+<!-- BOTÃO PEQUENO -->
+<button class="senha-btn" onclick="abrirLogin()">
+Senha
+</button>
 
-<input type="text" id="clienteNumero" placeholder="WhatsApp Cliente">
+<!-- LOGIN -->
+<div id="loginStatus" style="display:none; margin-top:15px;">
+
+<input type="password"
+id="senhaAdmin"
+placeholder="Digite a senha">
+
+<button class="btn" onclick="verificarSenha()">
+Entrar
+</button>
+
+</div>
+
+<!-- PAINEL OCULTO -->
+<div id="painelStatus" style="display:none; margin-top:20px;">
+
+<input type="text"
+id="clienteNome"
+placeholder="Nome do Cliente">
+
+<input type="text"
+id="clienteNumero"
+placeholder="WhatsApp Cliente">
 
 <select id="statusServico">
 
@@ -393,6 +418,8 @@ ABRIR NO MAPA
 <button class="btn" onclick="enviarStatus()">
 ENVIAR STATUS
 </button>
+
+</div>
 
 </section>
 
@@ -706,6 +733,46 @@ showToast('STATUS ENVIADO');
 if('serviceWorker' in navigator){
 
 navigator.serviceWorker.register('service-worker.js');
+
+}
+
+</script>
+
+<script>
+
+function abrirLogin(){
+
+const login = document.getElementById('loginStatus');
+
+if(login.style.display === 'none'){
+
+login.style.display = 'block';
+
+}else{
+
+login.style.display = 'none';
+
+}
+
+}
+
+function verificarSenha(){
+
+const senha = document.getElementById('senhaAdmin').value;
+
+if(senha === 'Phedaputa12.'){
+
+document.getElementById('painelStatus').style.display = 'block';
+
+document.getElementById('loginStatus').style.display = 'none';
+
+showToast('PAINEL LIBERADO');
+
+}else{
+
+showToast('SENHA INCORRETA');
+
+}
 
 }
 
