@@ -1,3 +1,4 @@
+console.log("Firebase carregado");
 console.log("APP.JS CARREGOU");
 import { db } from './firebase.js';
 
