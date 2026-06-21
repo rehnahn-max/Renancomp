@@ -1,3 +1,4 @@
+console.log("APP.JS CARREGOU");
 import { db } from './firebase.js';
 
 import {
