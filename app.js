@@ -44,6 +44,7 @@ data: serverTimestamp()
 
 });
 
+console.log("Cheguei no PDF");
 const { jsPDF } = window.jspdf;
 
 const doc = new jsPDF();
@@ -94,7 +95,13 @@ window.open(
 
 alert(`OS ${numeroOS} criada com sucesso!`);
 
-}catch(err){
+catch(err){
+
+console.error("ERRO COMPLETO:", err);
+
+alert("Erro: " + err.message);
+
+}
 
 console.error(err);
 
