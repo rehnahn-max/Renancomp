@@ -95,14 +95,12 @@ window.open(
 
 alert(`OS ${numeroOS} criada com sucesso!`);
 
+} catch(err){
+
 console.error("ERRO COMPLETO:", err);
 
 alert("Erro: " + err.message);
 
 }
-
-console.error(err);
-
-alert("Erro ao salvar OS.");
 
 }
