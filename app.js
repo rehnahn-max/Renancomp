@@ -1,5 +1,9 @@
 console.log("Firebase carregado");
 console.log("APP.JS CARREGOU");
+
+console.log("Cheguei no PDF");
+console.log(window.jspdf);
+
 import { db } from './firebase.js';
 
 import {
