@@ -314,13 +314,12 @@ flex-wrap:wrap;
 </nav>
 </header>
 
-<!-- Seção do Jogo do Dinossauro Offline -->
-<div class="card" id="offline-game-box" style="text-align:center;">
+<div class="card" id="offline-game-box" style="display:none; text-align:center;">
     <h2 class="title">Sem Conexão? Divirta-se!</h2>
-    <p style="color:#8b949e; margin-bottom:15px;">Parece que você está offline. Aproveite para jogar enquanto o sinal não volta:</p>
+    <p style="color:#8b949e; margin-bottom:15px;">Aproveite o jogo do dinossauro enquanto o sinal não volta:</p>
     
-    <div style="width:100%; height:160px; overflow:hidden; border-radius:16px; border:1px solid rgba(0,229,255,0.2);">
-        <iframe src="https://chromedino.com/" style="width:100%; height:200px; border:none; background:#050816; pointer-events:auto;" scrolling="no"></iframe>
+    <div class="offline-game-container">
+        <iframe src="https://chromedino.com/" scrolling="no"></iframe>
     </div>
 </div>
 
