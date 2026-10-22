@@ -1,861 +1,416 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050816">
-<link rel="icon" type="image/png" href="icon-192.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renan Tech Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-base: #050816;
+            --bg-card: #0b1128;
+            --border-neon: #0077ff;
+            --accent-cyan: #00e5ff;
+            --text-main: #f0f4f8;
+            --text-muted: #8a99ad;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Rajdhani', sans-serif; }
+        body { background-color: var(--bg-base); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        header {
+            background: linear-gradient(135deg, #0b1128, #050816);
+            border-bottom: 2px solid var(--border-neon);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 119, 255, 0.2);
+        }
+        .logo-area h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        .logo-area p { font-size: 0.85rem; color: var(--text-muted); letter-spacing: 1px; }
 
-<title>Renan Tech Premium</title>
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 5px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 119, 255, 0.3);
+        }
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .nav-btn.active {
+            background: var(--border-neon);
+            color: white;
+            box-shadow: 0 0 10px var(--border-neon);
+        }
 
-<link rel="manifest" href="manifest.json">
+        main { flex: 1; max-width: 1000px; width: 100%; margin: 20px auto; padding: 0 15px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 119, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
 
-<style>
+        h2 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--accent-cyan); margin-bottom: 15px; }
 
-:root{
---primary:#00e5ff;
---secondary:#0077ff;
---bg:#050816;
-}
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(5, 8, 22, 0.8);
+            border: 1px solid var(--border-neon);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+        .btn {
+            background: linear-gradient(135deg, var(--border-neon), #0044cc);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 119, 255, 0.4);
+        }
+        .btn:hover { box-shadow: 0 0 20px var(--accent-cyan); background: linear-gradient(135deg, #0044cc, var(--accent-cyan)); }
 
-body{
-background:var(--bg);
-font-family:'Rajdhani',sans-serif;
-color:white;
-overflow-x:hidden;
-min-height:100vh;
-}
+        .grid-catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .catalog-item {
+            background: rgba(5, 8, 22, 0.5);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .catalog-info h3 { font-size: 1.1rem; color: var(--text-main); }
+        .catalog-info p { font-size: 0.9rem; color: var(--text-muted); }
+        .price { font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); font-weight: bold; }
 
-.background{
-position:fixed;
-inset:0;
-background:
-linear-gradient(rgba(5,8,22,.85),rgba(5,8,22,.92)),
-url('Fundo.jpg') center center/cover no-repeat;
-z-index:-3;
-}
+        .os-list { display: flex; flex-direction: column; gap: 10px; }
+        .os-card {
+            background: rgba(5, 8, 22, 0.7);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .os-details h4 { color: var(--accent-cyan); font-size: 1rem; }
+        .os-details p { font-size: 0.9rem; color: var(--text-muted); }
+        
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge-aberta { background: #ffaa00; color: #000; }
+        .badge-analise { background: #0077ff; color: #fff; }
+        .badge-manutencao { background: #9900ff; color: #fff; }
+        .badge-pronta { background: #00e5ff; color: #000; }
+        .badge-entregue { background: #00cc66; color: #000; }
 
-canvas{
-position:fixed;
-inset:0;
-z-index:-2;
-pointer-events:none;
-}
+        .actions-group { display: flex; gap: 8px; }
+        .btn-sm { padding: 8px 12px; font-size: 0.85rem; width: auto; }
+        .btn-zap { background: #25d366; box-shadow: 0 0 10px rgba(37, 211, 102, 0.4); }
+        .btn-zap:hover { box-shadow: 0 0 20px #25d366; }
 
-.container{
-width:min(95%,1100px);
-margin:auto;
-padding:35px 15px 100px;
-}
-
-.hero{
-text-align:center;
-padding:50px 20px;
-margin-bottom:40px;
-}
-
-.hero h1{
-font-family:'Orbitron',sans-serif;
-font-size:clamp(2.5rem,7vw,5rem);
-color:var(--primary);
-text-shadow:
-0 0 10px rgba(0,229,255,.8),
-0 0 30px rgba(0,229,255,.4);
-}
-
-.hero p{
-margin-top:15px;
-font-size:1.2rem;
-letter-spacing:2px;
-}
-
-.card{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,.08);
-border-radius:30px;
-padding:28px;
-margin-bottom:30px;
-box-shadow:0 0 30px rgba(0,229,255,.08);
-}
-
-.title{
-font-family:'Orbitron',sans-serif;
-text-align:center;
-font-size:2rem;
-margin-bottom:25px;
-color:var(--primary);
-}
-
-.services{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.service{
-background:rgba(255,255,255,.04);
-border:1px solid rgba(0,229,255,.12);
-border-radius:25px;
-padding:22px;
-transition:.3s;
-}
-
-.service:hover{
-transform:translateY(-5px);
-}
-
-.price{
-font-size:1.5rem;
-font-family:'Orbitron',sans-serif;
-color:var(--primary);
-margin:15px 0;
-}
-
-.btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:18px;
-background:linear-gradient(45deg,var(--primary),var(--secondary));
-color:#fff;
-font-family:'Orbitron',sans-serif;
-font-weight:bold;
-font-size:.95rem;
-text-decoration:none;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:.3s;
-}
-
-.btn:hover{
-transform:scale(1.02);
-}
-
-input,
-textarea,
-select{
-width:100%;
-padding:16px;
-margin-bottom:15px;
-border-radius:18px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(0,229,255,.15);
-color:white;
-font-size:15px;
-outline:none;
-}
-
-textarea{
-height:120px;
-resize:none;
-}
-
-select option{
-background:#050816;
-}
-
-.actions{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-margin-top:10px;
-}
-
-#resultadoOS{
-display:none;
-margin-top:25px;
-padding:25px;
-border-radius:25px;
-background:rgba(255,255,255,.04);
-border:1px solid rgba(0,229,255,.12);
-line-height:2;
-}
-
-.os-title{
-font-family:'Orbitron',sans-serif;
-font-size:1.5rem;
-text-align:center;
-margin-bottom:20px;
-color:var(--primary);
-}
-
-.os-box{
-padding:14px;
-margin-bottom:12px;
-border-radius:16px;
-background:rgba(255,255,255,.03);
-}
-
-.status{
-color:#00ff88;
-font-weight:bold;
-}
-
-.footer{
-text-align:center;
-margin-top:40px;
-line-height:1.8;
-color:#ccc;
-}
-
-.toast{
-position:fixed;
-bottom:25px;
-right:25px;
-padding:16px 20px;
-border-radius:18px;
-background:rgba(0,229,255,.14);
-backdrop-filter:blur(10px);
-opacity:0;
-transform:translateY(20px);
-transition:.3s;
-z-index:9999;
-}
-
-.toast.show{
-opacity:1;
-transform:translateY(0);
-}
-
-@media(max-width:768px){
-
-.hero{
-padding:20px 0;
-}
-
-.card{
-padding:20px;
-}
-
-}
-
-</style>
+        .install-box { text-align: center; padding: 30px; }
+        .install-box p { color: var(--text-muted); margin-bottom: 20px; }
+    </style>
 </head>
 <body>
 
-<div class="background"></div>
-
-<canvas id="particles"></canvas>
-
-<div class="toast" id="toast"></div>
-
-<div class="container">
-
-<section class="hero">
-
-<h1>RENAN TECH PREMIUM</h1>
-
-<p>Performance • Upgrade • Manutenção Profissional</p>
-
-</section>
-
-<section class="card">
-
-<h2 class="title">Tabela de Preços</h2>
-
-<div class="services">
-
-<div class="service">
-<h2>Troca de teclado notebook</h2>
-<div class="price">R$120</div>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20troca%20de%20teclado">
-Agendar Serviço
-</a>
-</div>
-
-<div class="service">
-<h2>Troca de tela notebook</h2>
-<div class="price">R$120</div>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20troca%20de%20tela">
-Agendar Serviço
-</a>
-</div>
-
-<div class="service">
-<h2>Montagem Gamer</h2>
-<div class="price">R$150</div>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20montagem">
-Agendar Serviço
-</a>
-</div>
-
-<div class="service">
-<h2>Formatação C/ Backup</h2>
-<div class="price">R$120</div>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20formatação%20backup">
-Agendar Serviço
-</a>
-</div>
-
-<div class="service">
-<h2>Formatação S/ backup</h2>
-<div class="price">R$80</div>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20formatação">
-Agendar Serviço
-</a>
-</div>
-
-<div class="service">
-<h2>Limpeza de Computador</h2>
-<div class="price">R$100</div>
-
-<a class="btn" target="_blank"
-href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20limpeza%20de%20Computador">
-Agendar Serviço
-</a>
-</div>
-
-</div>
-
-</section>
-
-<section class="card">
-
-<h2 class="title">Central de Ordem de Serviço</h2>
-
-<input type="text" id="cliente" placeholder="Nome do Cliente">
-
-<input type="text" id="telefone" placeholder="Telefone">
-
-<input type="text" id="endereco" placeholder="Endereço Completo">
-
-<input type="text" id="equipamento" placeholder="Equipamento">
-
-<textarea id="defeito" placeholder="Defeito Relatado"></textarea>
-
-<select id="valor">
-
-<option value="">Selecione o Serviço</option>
-
-<option value="Orçamento - R$20">
-Orçamento - R$20
-</option>
-
-<option value="Troca de teclado notebook - R$120">
-Troca de teclado notebook - R$120
-</option>
-
-<option value="Troca de tela notebook - R$120">
-Troca de tela notebook - R$120
-</option>
-
-<option value="Formatação Completa - R$80">
-Formatação Completa - R$80
-</option>
-
-<option value="Montagem Gamer - R$150">
-Montagem Gamer - R$150
-</option>
-
-</select>
-
-<div class="actions">
-
-<button class="btn" onclick="gerarOS()">
-GERAR OS
-</button>
-
-<button class="btn" onclick="abrirMapa()">
-ABRIR NO MAPA
-</button>
-
-</div>
-
-<div id="resultadoOS"></div>
-
-</section>
-
-<section class="card">
-
-<h2 class="title">Status do Serviço</h2>
-
-<!-- BOTÃO PEQUENO -->
-<button class="senha-btn" onclick="abrirLogin()">
-Senha
-</button>
-
-<!-- LOGIN -->
-<div id="loginStatus" style="display:none; margin-top:15px;">
-
-<input type="password"
-id="senhaAdmin"
-placeholder="Digite a senha">
-
-<button class="btn" onclick="verificarSenha()">
-Entrar
-</button>
-
-</div>
-
-<!-- PAINEL OCULTO -->
-<div id="painelStatus" style="display:none; margin-top:20px;">
-
-<input type="text"
-id="clienteNome"
-placeholder="Nome do Cliente">
-
-<input type="text"
-id="clienteNumero"
-placeholder="WhatsApp Cliente">
-
-<select id="statusServico">
-
-<option value="🔎 Avaliando Serviço">
-🔎 Avaliando Serviço
-</option>
-
-<option value="🛠 Trabalhando">
-🛠 Trabalhando
-</option>
-
-<option value="✅ Serviço Efetuado">
-✅ Serviço Efetuado
-</option>
-
-</select>
-
-<button class="btn" onclick="enviarStatus()">
-ENVIAR STATUS
-</button>
-
-</div>
-
-</section>
-
-<div class="footer">
-
-<p>
-Garantia de 90 dias conforme CDC Artigo 26
-</p>
-
-<p>
-Atendimento rápido via WhatsApp
-</p>
-
-</div>
-
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script type="module" src="./firebase.js"></script>
-<script type="module" src="./app.js"></script>
-
-<script>
-
-const canvas = document.getElementById('particles');
-
-const ctx = canvas.getContext('2d');
-
-function resize(){
-
-canvas.width = innerWidth;
-
-canvas.height = innerHeight;
-
-}
-
-resize();
-
-addEventListener('resize',resize);
-
-const particles=[];
-
-for(let i=0;i<60;i++){
-
-particles.push({
-
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-radius:Math.random()*2,
-sx:(Math.random()-.5)*0.2,
-sy:(Math.random()-.5)*0.2,
-op:Math.random()*0.5
-
-});
-
-}
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-particles.forEach(p=>{
-
-p.x+=p.sx;
-p.y+=p.sy;
-
-if(p.x<0||p.x>canvas.width)p.sx*=-1;
-
-if(p.y<0||p.y>canvas.height)p.sy*=-1;
-
-ctx.beginPath();
-
-ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
-
-ctx.fillStyle=`rgba(0,229,255,${p.op})`;
-
-ctx.shadowBlur=10;
-
-ctx.shadowColor='#00e5ff';
-
-ctx.fill();
-
-});
-
-requestAnimationFrame(animate);
-
-}
-
-animate();
-
-function showToast(msg){
-
-const toast=document.getElementById('toast');
-
-toast.innerText=msg;
-
-toast.classList.add('show');
-
-setTimeout(()=>{
-
-toast.classList.remove('show');
-
-},3000);
-
-}
-
-document.getElementById('telefone').addEventListener('input',(e)=>{
-
-let v=e.target.value.replace(/\D/g,'');
-
-v=v.replace(/^(\d{2})(\d)/g,'($1) $2');
-
-v=v.replace(/(\d{5})(\d)/,'$1-$2');
-
-e.target.value=v;
-
-});
-
-async function gerarOS(){
-
-const cliente=document.getElementById('cliente').value.trim();
-
-const telefone=document.getElementById('telefone').value.trim();
-
-const endereco=document.getElementById('endereco').value.trim();
-
-const equipamento=document.getElementById('equipamento').value.trim();
-
-const defeito=document.getElementById('defeito').value.trim();
-
-const valor=document.getElementById('valor').value;
-
-if(!cliente||!telefone||!endereco||!equipamento||!defeito||!valor){
-
-showToast('PREENCHA TODOS OS CAMPOS');
-
-return;
-
-}
-
-const numeroOS=Math.floor(Math.random()*999999);
-
-const data=new Date().toLocaleDateString('pt-BR');
-
-document.getElementById('resultadoOS').style.display='block';
-
-document.getElementById('resultadoOS').innerHTML=`
-
-<div class="os-title">
-ORDEM DE SERVIÇO Nº ${numeroOS}
-</div>
-
-<div class="os-box">
-<strong>Cliente:</strong> ${cliente}
-</div>
-
-<div class="os-box">
-<strong>Telefone:</strong> ${telefone}
-</div>
-
-<div class="os-box">
-<strong>Endereço:</strong> ${endereco}
-</div>
-
-<div class="os-box">
-<strong>Equipamento:</strong> ${equipamento}
-</div>
-
-<div class="os-box">
-<strong>Defeito:</strong> ${defeito}
-</div>
-
-<div class="os-box">
-<strong>Serviço:</strong> ${valor}
-</div>
-
-<div class="os-box">
-<strong>Data:</strong> ${data}
-</div>
-
-<div class="os-box">
-<strong>Status:</strong>
-<span class="status">EM ANÁLISE</span>
-</div>
-
-`;
-
-const { jsPDF } = window.jspdf;
-
-const doc = new jsPDF();
-
-doc.setFillColor(5,8,22);
-
-doc.rect(0,0,210,297,'F');
-
-doc.setTextColor(0,229,255);
-
-doc.setFontSize(22);
-
-doc.text('RENAN TECH PREMIUM',20,25);
-
-doc.setTextColor(255,255,255);
-
-doc.setFontSize(12);
-
-doc.text(`OS Nº ${numeroOS}`,20,45);
-
-doc.text(`Cliente: ${cliente}`,20,65);
-
-doc.text(`Telefone: ${telefone}`,20,80);
-
-doc.text(`Endereço: ${endereco}`,20,95);
-
-doc.text(`Equipamento: ${equipamento}`,20,110);
-
-doc.text(`Defeito: ${defeito}`,20,130);
-
-doc.text(`Serviço: ${valor}`,20,150);
-
-doc.text(`Data: ${data}`,20,170);
-
-doc.save(`OS-${numeroOS}.pdf`);
-
-const mensagem=`📋 RENAN TECH PREMIUM
-
-🆔 OS: ${numeroOS}
-
-👤 Cliente: ${cliente}
-
-📞 Telefone: ${telefone}
-
-📍 Endereço: ${endereco}
-
-💻 Equipamento: ${equipamento}
-
-⚠ Defeito: ${defeito}
-
-🛠 Serviço: ${valor}
-
-📅 Data: ${data}`;
-
-window.open(
-
-`https://wa.me/5531992372280?text=${encodeURIComponent(mensagem)}`,
-
-'_blank'
-
-);
-
-showToast('OS GERADA COM SUCESSO');
-
-}
-
-function abrirMapa(){
-
-const endereco=document.getElementById('endereco').value.trim();
-
-if(!endereco){
-
-showToast('DIGITE O ENDEREÇO');
-
-return;
-
-}
-
-window.open(
-
-`https://www.google.com/maps/search/${encodeURIComponent(endereco)}`,
-
-'_blank'
-
-);
-
-}
-
-function enviarStatus(){
-
-const nome=document.getElementById('clienteNome').value;
-
-const numero=document.getElementById('clienteNumero').value;
-
-const status=document.getElementById('statusServico').value;
-
-if(!nome||!numero){
-
-showToast('PREENCHA OS CAMPOS');
-
-return;
-
-}
-
-const mensagem=`Olá ${nome}! 👋
-
-Aqui é da Renan Tech Premium 🔧
-
-Seu aparelho está atualmente em status:
-
-${status}
-
-Obrigado pela preferência 🙏`;
-
-window.open(
-
-`https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`,
-
-'_blank'
-
-);
-
-showToast('STATUS ENVIADO');
-
-}
-
-if('serviceWorker' in navigator){
-
-navigator.serviceWorker.register('service-worker.js');
-
-}
-
-</script>
-
-<script>
-
-function abrirLogin(){
-
-const login = document.getElementById('loginStatus');
-
-if(login.style.display === 'none'){
-
-login.style.display = 'block';
-
-}else{
-
-login.style.display = 'none';
-
-}
-
-}
-
-function verificarSenha(){
-
-const senha = document.getElementById('senhaAdmin').value;
-
-if(senha === 'Phedaputa12.'){
-
-document.getElementById('painelStatus').style.display = 'block';
-
-document.getElementById('loginStatus').style.display = 'none';
-
-showToast('PAINEL LIBERADO');
-
-}else{
-
-showToast('SENHA INCORRETA');
-
-}
-
-}
-
-</script>
-
-<button id="installBtn" style="
-display:none;
-position:fixed;
-bottom:20px;
-left:20px;
-z-index:9999;
-padding:15px;
-border:none;
-border-radius:15px;
-background:#00e5ff;
-color:#050816;
-font-weight:bold;
-cursor:pointer;
-">
-📲 Instalar App
-</button>
-
-<script>
-
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-
-  e.preventDefault();
-
-  deferredPrompt = e;
-
-  document.getElementById('installBtn').style.display = 'block';
-
-});
-
-document.getElementById('installBtn').addEventListener('click', async () => {
-
-  if(!deferredPrompt) return;
-
-  deferredPrompt.prompt();
-
-  const { outcome } = await deferredPrompt.userChoice;
-
-  if(outcome === 'accepted'){
-    console.log('App instalado');
-  }
-
-  deferredPrompt = null;
-
-  document.getElementById('installBtn').style.display = 'none';
-
-});
-
-</script>
-
-<script type="module" src="./firebase.js"></script>
-<script type="module" src="./app.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <header>
+        <div class="logo-area">
+            <h1>RENAN TECH</h1>
+            <p>PREMIUM ASSISTÊNCIA</p>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('cliente')">Cliente</button>
+            <button class="nav-btn" onclick="switchTab('catalogo')">Catálogo</button>
+            <button class="nav-btn" onclick="switchTab('proprietario')">Painel</button>
+            <button class="nav-btn" onclick="switchTab('instalar')">Instalar</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ABA CLIENTE -->
+        <div id="tab-cliente" class="tab-content active">
+            <div class="card">
+                <h2>Abrir Ordem de Serviço</h2>
+                <form id="form-os" onsubmit="criarOS(event)">
+                    <div class="form-group">
+                        <label>Seu Nome</label>
+                        <input type="text" id="cliente-nome" required placeholder="Ex: João da Silva">
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp (com DDD)</label>
+                        <input type="text" id="cliente-tel" required placeholder="Ex: 31999999999">
+                    </div>
+                    <div class="form-group">
+                        <label>Equipamento</label>
+                        <input type="text" id="cliente-equip" required placeholder="Ex: Notebook Gamer / iPhone 13">
+                    </div>
+                    <div class="form-group">
+                        <label>Serviço Desejado</label>
+                        <select id="cliente-servico" required>
+                            <option value="Formatação e Otimização - R$ 120,00">Formatação e Otimização - R$ 120,00</option>
+                            <option value="Troca de Tela - R$ 250,00">Troca de Tela - R$ 250,00</option>
+                            <option value="Limpeza Preventiva - R$ 90,00">Limpeza Preventiva - R$ 90,00</option>
+                            <option value="Diagnóstico Técnico - R$ 50,00">Diagnóstico Técnico - R$ 50,00</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição do Problema</label>
+                        <textarea id="cliente-prob" rows="3" required placeholder="Descreva o que está acontecendo..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Gerar OS e Enviar</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Acompanhar Meus Atendimentos</h2>
+                <div id="lista-cliente" class="os-list">
+                    <p style="color: var(--text-muted); text-align: center;">Nenhuma ordem encontrada neste dispositivo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA CATÁLOGO -->
+        <div id="tab-catalogo" class="tab-content">
+            <div class="card">
+                <h2>Serviços e Preços</h2>
+                <div class="grid-catalog">
+                    <div class="catalog-item">
+                        <div class="catalog-info">
+                            <h3>Formatação e Otimização</h3>
+                            <p>Sistema limpo e rápido</p>
+                        </div>
+                        <span class="price">R$ 120</span>
+                    </div>
+                    <div class="catalog-item">
+                        <div class="catalog-info">
+                            <h3>Troca de Tela</h3>
+                            <p>Display novo com garantia</p>
+                        </div>
+                        <span class="price">R$ 250</span>
+                    </div>
+                    <div class="catalog-item">
+                        <div class="catalog-info">
+                            <h3>Limpeza Preventiva</h3>
+                            <p>Troca de pasta térmica e poeira</p>
+                        </div>
+                        <span class="price">R$ 90</span>
+                    </div>
+                    <div class="catalog-item">
+                        <div class="catalog-info">
+                            <h3>Diagnóstico Técnico</h3>
+                            <p>Orçamento detalhado</p>
+                        </div>
+                        <span class="price">R$ 50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA PROPRIETÁRIO -->
+        <div id="tab-proprietario" class="tab-content">
+            <div class="card">
+                <h2>Painel Interno (Todas as OS)</h2>
+                <div id="lista-proprietario" class="os-list">
+                    <p style="color: var(--text-muted); text-align: center;">Nenhuma ordem registrada.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA INSTALAR -->
+        <div id="tab-instalar" class="tab-content">
+            <div class="card install-box">
+                <h2>Instalar Aplicativo</h2>
+                <p>Adicione o Renan Tech na tela inicial do seu celular (Android ou iOS) para acesso rápido como um app nativo.</p>
+                <button class="btn" onclick="alert('No iPhone: abra o menu Compartilhar do Safari e toque em \"Adicionar à Tela Inicial\".\n\nNo Android: abra o menu do Chrome e toque em \"Instalar aplicativo\" ou \"Adicionar à tela inicial\".')">Ver Instruções de Instalação</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            renderizarOrdens();
+        }
+
+        let ordens = JSON.parse(localStorage.getItem('renan_tech_os') || '[]');
+
+        function criarOS(e) {
+            e.preventDefault();
+            const nova = {
+                id: Math.floor(1000 + Math.random() * 9000),
+                cliente: document.getElementById('cliente-nome').value,
+                telefone: document.getElementById('cliente-tel').value,
+                equipamento: document.getElementById('cliente-equip').value,
+                servico: document.getElementById('cliente-servico').value,
+                problema: document.getElementById('cliente-prob').value,
+                status: 'Aberta',
+                data: new Date().toLocaleDateString('pt-BR')
+            };
+
+            ordens.unshift(nova);
+            localStorage.setItem('renan_tech_os', JSON.stringify(ordens));
+            
+            document.getElementById('form-os').reset();
+            alert('Ordem criada com sucesso!');
+            switchTab('cliente');
+            gerarPDF(nova.id);
+        }
+
+        function mudarStatus(id, novoStatus) {
+            ordens = ordens.map(o => o.id === id ? {...o, status: novoStatus} : o);
+            localStorage.setItem('renan_tech_os', JSON.stringify(ordens));
+            renderizarOrdens();
+        }
+
+        function renderizarOrdens() {
+            // Cliente
+            const containerCliente = document.getElementById('lista-cliente');
+            if (ordens.length === 0) {
+                containerCliente.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Nenhuma ordem encontrada.</p>';
+            } else {
+                containerCliente.innerHTML = ordens.map(o => `
+                    <div class="os-card">
+                        <div class="os-details">
+                            <h4>OS #${o.id} — ${o.equipamento}</h4>
+                            <p>${o.servico} | ${o.data}</p>
+                            <span class="badge badge-${o.status.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(' ', '')}">${o.status}</span>
+                        </div>
+                        <div class="actions-group">
+                            <button class="btn btn-sm" onclick="gerarPDF(${o.id})">Baixar PDF</button>
+                            <button class="btn btn-sm btn-zap" onclick="enviarWhatsApp(${o.id})">WhatsApp</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Proprietário
+            const containerProp = document.getElementById('lista-proprietario');
+            if (ordens.length === 0) {
+                containerProp.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Nenhuma ordem registrada.</p>';
+            } else {
+                containerProp.innerHTML = ordens.map(o => `
+                    <div class="os-card">
+                        <div class="os-details">
+                            <h4>OS #${o.id} — ${o.cliente} (${o.telefone})</h4>
+                            <p><b>Equipamento:</b> ${o.equipamento} | <b>Serviço:</b> ${o.servico}</p>
+                            <p><b>Problema:</b> ${o.problema}</p>
+                        </div>
+                        <div>
+                            <select onchange="mudarStatus(${o.id}, this.value)" style="padding: 6px; font-size: 0.9rem;">
+                                <option value="Aberta" ${o.status==='Aberta'?'selected':''}>Aberta</option>
+                                <option value="Em análise" ${o.status==='Em análise'?'selected':''}>Em análise</option>
+                                <option value="Em manutenção" ${o.status==='Em manutenção'?'selected':''}>Em manutenção</option>
+                                <option value="Pronta" ${o.status==='Pronta'?'selected':''}>Pronta</option>
+                                <option value="Entregue" ${o.status==='Entregue'?'selected':''}>Entregue</option>
+                            </select>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function gerarPDF(id) {
+            const o = ordens.find(item => item.id === id);
+            if (!o) return;
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFillColor(5, 8, 22);
+            doc.rect(0, 0, 210, 40, 'F');
+            doc.setTextColor(0, 229, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(18);
+            doc.text("RENAN TECH PREMIUM", 15, 20);
+            doc.setFontSize(10);
+            doc.setTextColor(150, 160, 180);
+            doc.text("Comprovante de Ordem de Serviço", 15, 28);
+
+            doc.setTextColor(20, 20, 20);
+            doc.setFontSize(14);
+            doc.text(`Ordem de Serviço Nº #${o.id}`, 15, 55);
+            
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Data de Abertura: ${o.data}`, 15, 63);
+            doc.text(`Cliente: ${o.cliente}`, 15, 73);
+            doc.text(`Telefone: ${o.telefone}`, 15, 83);
+            doc.text(`Equipamento: ${o.equipamento}`, 15, 93);
+            doc.text(`Serviço: ${o.servico}`, 15, 103);
+            doc.text(`Status Atual: ${o.status}`, 15, 113);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Problema Relatado:", 15, 128);
+            doc.setFont("helvetica", "normal");
+            doc.text(o.problema, 15, 136, { maxWidth: 180 });
+
+            doc.save(`OS_${o.id}_RenanTech.pdf`);
+        }
+
+        function enviarWhatsApp(id) {
+            const o = ordens.find(item => item.id === id);
+            if (!o) return;
+            const msg = encodeURIComponent(`Olá ${o.cliente}, aqui está o resumo da sua Ordem de Serviço #${o.id} (${o.equipamento}) na Renan Tech Premium. Status atual: ${o.status}.`);
+            window.open(`https://api.whatsapp.com/send?phone=55${o.telefone}&text=${msg}`, '_blank');
+        }
+
+        renderizarOrdens();
+    </script>
 </body>
 </html>
