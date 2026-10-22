@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050816">
+<link rel="icon" type="image/png" href="icon-192.png">
+
+<title>Renan Tech Premium</title>
+
+<link rel="manifest" href="manifest.json">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#00e5ff;
+--secondary:#0077ff;
+--bg:#050816;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+font-family:'Rajdhani',sans-serif;
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+.background{
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(5,8,22,.85),rgba(5,8,22,.92)),
+url('Fundo.jpg') center center/cover no-repeat;
+z-index:-3;
+}
+
+canvas{
+position:fixed;
+inset:0;
+z-index:-2;
+pointer-events:none;
+}
+
+/* Header Estilo App Moderno */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:rgba(5,8,22,0.8);
+backdrop-filter:blur(15px);
+border-bottom:1px solid rgba(0,229,255,0.15);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo-area h1{
+font-family:'Orbitron',sans-serif;
+font-size:1.2rem;
+color:var(--primary);
+letter-spacing:1px;
+}
+
+.logo-area p{
+font-size:0.75rem;
+color:#8b949e;
+letter-spacing:2px;
+}
+
+nav{
+display:flex;
+gap:10px;
+}
+
+.nav-btn{
+background:transparent;
+border:1px solid rgba(255,255,255,0.1);
+color:#fff;
+padding:8px 18px;
+border-radius:20px;
+cursor:pointer;
+font-family:'Rajdhani',sans-serif;
+font-weight:600;
+font-size:0.95rem;
+transition:.3s;
+}
+
+.nav-btn:hover, .nav-btn.active{
+background:var(--primary);
+color:var(--bg);
+border-color:var(--primary);
+box-shadow:0 0 15px rgba(0,229,255,0.4);
+}
+
+.container{
+width:min(95%,1000px);
+margin:auto;
+padding:40px 15px 100px;
+}
+
+.tab-content{
+display:none;
+}
+
+.tab-content.active{
+display:block;
+}
+
+.card{
+background:rgba(255,255,255,.03);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+padding:30px;
+margin-bottom:30px;
+box-shadow:0 0 30px rgba(0,229,255,.05);
+}
+
+.title{
+font-family:'Orbitron',sans-serif;
+font-size:1.5rem;
+margin-bottom:20px;
+color:var(--primary);
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.service{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(0,229,255,.1);
+border-radius:20px;
+padding:20px;
+transition:.3s;
+}
+
+.service:hover{
+transform:translateY(-4px);
+border-color:var(--primary);
+}
+
+.price{
+font-size:1.4rem;
+font-family:'Orbitron',sans-serif;
+color:var(--primary);
+margin:12px 0;
+}
+
+.btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:16px;
+background:linear-gradient(45deg,var(--primary),var(--secondary));
+color:#fff;
+font-family:'Orbitron',sans-serif;
+font-weight:bold;
+font-size:0.9rem;
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.01);
+box-shadow:0 0 20px rgba(0,229,255,0.4);
+}
+
+input, textarea, select{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border-radius:16px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(0,229,255,.15);
+color:white;
+font-size:15px;
+outline:none;
+font-family:'Rajdhani',sans-serif;
+}
+
+input:focus, textarea:focus, select:focus{
+border-color:var(--primary);
+box-shadow:0 0 10px rgba(0,229,255,0.2);
+}
+
+textarea{
+height:110px;
+resize:none;
+}
+
+select option{
+background:#050816;
+}
+
+#resultadoOS{
+display:none;
+margin-top:25px;
+padding:20px;
+border-radius:20px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(0,229,255,.12);
+line-height:1.8;
+}
+
+.os-box{
+padding:10px 14px;
+margin-bottom:8px;
+border-radius:12px;
+background:rgba(255,255,255,.02);
+}
+
+.status{
+color:#00ff88;
+font-weight:bold;
+}
+
+.toast{
+position:fixed;
+bottom:25px;
+right:25px;
+padding:15px 22px;
+border-radius:16px;
+background:rgba(0,229,255,.15);
+backdrop-filter:blur(10px);
+border:1px solid var(--primary);
+opacity:0;
+transform:translateY(20px);
+transition:.3s;
+z-index:9999;
+font-weight:600;
+}
+
+.toast.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.install-step {
+background: rgba(255,255,255,0.03);
+border-left: 4px solid var(--primary);
+padding: 15px 20px;
+border-radius: 0 16px 16px 0;
+margin-bottom: 15px;
+}
+
+.install-step h3 {
+font-family: 'Orbitron', sans-serif;
+color: var(--primary);
+font-size: 1.1rem;
+margin-bottom: 8px;
+}
+
+.install-step p, .install-step li {
+color: #c9d1d9;
+font-size: 1rem;
+line-height: 1.6;
+}
+
+.install-step ul {
+margin-left: 20px;
+margin-top: 5px;
+}
+
+@media(max-width:768px){
+header{
+padding:15px 20px;
+flex-direction:column;
+gap:15px;
+}
+nav{
+width:100%;
+justify-content:center;
+flex-wrap:wrap;
+}
+}
+
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+<canvas id="particles"></canvas>
+<div class="toast" id="toast"></div>
+
+<!-- Header / Menu Superior -->
+<header>
+<div class="logo-area">
+<h1>RENAN TECH</h1>
+<p>PREMIUM ASSISTÊNCIA</p>
+</div>
+<nav>
+<button class="nav-btn active" onclick="mudarAba('cliente', event)">Cliente</button>
+<button class="nav-btn" onclick="mudarAba('catalogo', event)">Catálogo</button>
+<button class="nav-btn" onclick="mudarAba('painel', event)">Painel</button>
+<button class="nav-btn" onclick="mudarAba('instalar', event)">Instalar</button>
+</nav>
+</header>
+
+<!-- Seção do Jogo do Dinossauro Offline -->
+<div class="card" id="offline-game-box" style="text-align:center;">
+    <h2 class="title">Sem Conexão? Divirta-se!</h2>
+    <p style="color:#8b949e; margin-bottom:15px;">Parece que você está offline. Aproveite para jogar enquanto o sinal não volta:</p>
+    
+    <div style="width:100%; height:160px; overflow:hidden; border-radius:16px; border:1px solid rgba(0,229,255,0.2);">
+        <iframe src="https://chromedino.com/" style="width:100%; height:200px; border:none; background:#050816; pointer-events:auto;" scrolling="no"></iframe>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- ABA 1: CLIENTE (Abrir OS) -->
+<div id="aba-cliente" class="tab-content active">
+<section class="card">
+<h2 class="title">Abrir Ordem de Serviço</h2>
+
+<input type="text" id="cliente" placeholder="Seu Nome">
+<input type="text" id="telefone" placeholder="WhatsApp (Com DDD)">
+<input type="text" id="endereco" placeholder="Endereço Completo">
+<input type="text" id="equipamento" placeholder="Ex: Notebook Gamer / iPhone 13">
+<textarea id="defeito" placeholder="Descreva o que está acontecendo..."></textarea>
+
+<select id="valor">
+<option value="">Selecione o Serviço Desejado</option>
+<option value="Orçamento - R$20">Orçamento - R$20</option>
+<option value="Troca de teclado notebook - R$120">Troca de teclado notebook - R$120</option>
+<option value="Troca de tela notebook - R$120">Troca de tela notebook - R$120</option>
+<option value="Formatação Completa - R$80">Formatação Completa - R$80</option>
+<option value="Montagem Gamer - R$150">Montagem Gamer - R$150</option>
+</select>
+
+<div class="actions" style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+<button class="btn" onclick="gerarOS()">GERAR OS E ENVIAR</button>
+<button class="btn" onclick="abrirMapa()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(0,229,255,0.3);">ABRIR NO MAPA</button>
+</div>
+
+<div id="resultadoOS"></div>
+</section>
+</div>
+
+<!-- ABA 2: CATÁLOGO DE SERVIÇOS -->
+<div id="aba-catalogo" class="tab-content">
+<section class="card">
+<h2 class="title">Catálogo de Serviços</h2>
+<div class="services">
+
+<div class="service">
+<h2>Troca de Teclado</h2>
+<p style="color:#8b949e; font-size:0.9rem; margin-top:5px;">Substituição de teclado compatível ou original.</p>
+<div class="price">R$ 120,00</div>
+<a class="btn" target="_blank" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20troca%20de%20teclado">Agendar</a>
+</div>
+
+<div class="service">
+<h2>Troca de Tela</h2>
+<p style="color:#8b949e; font-size:0.9rem; margin-top:5px;">Telas LED/IPS com garantia inclusa.</p>
+<div class="price">R$ 120,00</div>
+<a class="btn" target="_blank" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20troca%20de%20tela">Agendar</a>
+</div>
+
+<div class="service">
+<h2>Montagem Gamer</h2>
+<p style="color:#8b949e; font-size:0.9rem; margin-top:5px;">Organização de cabos e testes de estresse.</p>
+<div class="price">R$ 150,00</div>
+<a class="btn" target="_blank" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20montagem">Agendar</a>
+</div>
+
+<div class="service">
+<h2>Formatação C/ Backup</h2>
+<p style="color:#8b949e; font-size:0.9rem; margin-top:5px;">Sistema limpo, drivers e salvamento de arquivos.</p>
+<div class="price">R$ 120,00</div>
+<a class="btn" target="_blank" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20formatação%20backup">Agendar</a>
+</div>
+
+<div class="service">
+<h2>Formatação S/ Backup</h2>
+<p style="color:#8b949e; font-size:0.9rem; margin-top:5px;">Instalação limpa rápida do sistema operacional.</p>
+<div class="price">R$ 80,00</div>
+<a class="btn" target="_blank" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20formatação">Agendar</a>
+</div>
+
+<div class="service">
+<h2>Limpeza de Computador</h2>
+<p style="color:#8b949e; font-size:0.9rem; margin-top:5px;">Troca de pasta térmica e remoção de poeira.</p>
+<div class="price">R$ 100,00</div>
+<a class="btn" target="_blank" href="https://wa.me/5531992372280?text=Olá,%20quero%20agendar%20limpeza">Agendar</a>
+</div>
+
+</div>
+</section>
+</div>
+
+<!-- ABA 3: PAINEL ADMINISTRATIVO -->
+<div id="aba-painel" class="tab-content">
+<section class="card">
+<h2 class="title">Acesso Restrito</h2>
+<div id="loginStatus">
+<p style="margin-bottom:15px; color:#8b949e;">Digite a senha para gerenciar os atendimentos:</p>
+<input type="password" id="senhaAdmin" placeholder="Senha de acesso">
+<button class="btn" onclick="verificarSenha()">Entrar no Painel</button>
+</div>
+
+<div id="painelStatus" style="display:none; margin-top:15px;">
+<p style="color:#00ff88; font-weight:bold; margin-bottom:15px;">✓ Painel Liberado com Sucesso</p>
+<input type="text" id="clienteNome" placeholder="Nome do Cliente">
+<input type="text" id="clienteNumero" placeholder="WhatsApp do Cliente">
+<input type="text" id="osAtualizar" placeholder="Número da OS">
+<select id="statusServico">
+<option value="🔎 Avaliando Serviço">🔎 Avaliando Serviço</option>
+<option value="🛠 Trabalhando no Aparelho">🛠 Trabalhando no Aparelho</option>
+<option value="✅ Serviço Concluído / Pronto">✅ Serviço Concluído / Pronto</option>
+</select>
+<button class="btn" onclick="enviarStatus()">Atualizar e Enviar via WhatsApp</button>
+</div>
+</section>
+</div>
+
+<!-- ABA 4: COMO INSTALAR NO CELULAR -->
+<div id="aba-instalar" class="tab-content">
+<section class="card">
+<h2 class="title">Instale o App no seu Celular</h2>
+<p style="margin-bottom:25px; color:#8b949e; line-height:1.6;">
+Tenha a Renan Tech Premium direto na tela inicial do seu smartphone como um aplicativo nativo, com acesso rápido e funcionamento offline.
+</p>
+
+<div class="install-step">
+<h3>🤖 No Android (Google Chrome)</h3>
+<ul>
+<li>Abra este site no navegador <strong>Google Chrome</strong>.</li>
+<li>Toque no ícone de <strong>três pontos (⋮)</strong> no canto superior direito da tela.</li>
+<li>Selecione a opção <strong>"Instalar aplicativo"</strong> ou <strong>"Adicionar à tela inicial"</strong>.</li>
+<li>Confirme tocando em <strong>Instalar</strong>. Pronto, o ícone aparecerá no seu menu!</li>
+</ul>
+</div>
+
+<div class="install-step" style="border-left-color: #0077ff;">
+<h3>🍏 No iPhone / iOS (Safari)</h3>
+<ul>
+<li>Abra este site no navegador <strong>Safari</strong>.</li>
+<li>Toque no botão de <strong>Compartilhar</strong> (o ícone de quadrado com a seta para cima ⎋ na barra inferior).</li>
+<li>Role as opções para baixo e selecione <strong>"Adicionar à Tela de Início"</strong>.</li>
+<li>Toque em <strong>Adicionar</strong> no canto superior direito. O aplicativo estará na sua tela inicial!</li>
+</ul>
+</div>
+
+<div style="text-align:center; margin-top:30px;">
+<button class="btn" id="installBtn" style="display:none; max-width:300px; margin:auto;" onclick="instalarAppPWA()">
+📲 Instalar no Aparelho Agora
+</button>
+</div>
+
+</section>
+</div>
+
+</div>
+
+<!-- Bibliotecas e Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+// Navegação entre Abas
+function mudarAba(abaId, event){
+document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+
+document.getElementById('aba-' + abaId).classList.add('active');
+if(event && event.target){
+event.target.classList.add('active');
+}
+}
+
+// Animação de Partículas no Canvas
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+function resize(){
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+}
+resize();
+addEventListener('resize', resize);
+
+const particles=[];
+for(let i=0;i<50;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+radius:Math.random()*1.5,
+sx:(Math.random()-.5)*0.2,
+sy:(Math.random()-.5)*0.2,
+op:Math.random()*0.4
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.sx;
+p.y+=p.sy;
+if(p.x<0||p.x>canvas.width)p.sx*=-1;
+if(p.y<0||p.y>canvas.height)p.sy*=-1;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+ctx.fillStyle=`rgba(0,229,255,${p.op})`;
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+// Toast de Notificação
+function showToast(msg){
+const toast=document.getElementById('toast');
+toast.innerText=msg;
+toast.classList.add('show');
+setTimeout(()=>{
+toast.classList.remove('show');
+},3000);
+}
+
+// Máscara Telefone
+document.getElementById('telefone').addEventListener('input',(e)=>{
+let v=e.target.value.replace(/\D/g,'');
+v=v.replace(/^(\d{2})(\d)/g,'($1) $2');
+v=v.replace(/(\d{5})(\d)/,'$1-$2');
+e.target.value=v;
+});
+
+// Gerar OS, PDF e WhatsApp
+async function gerarOS(){
+const cliente=document.getElementById('cliente').value.trim();
+const telefoneInput=document.getElementById('telefone').value.trim();
+const endereco=document.getElementById('endereco').value.trim();
+const equipamento=document.getElementById('equipamento').value.trim();
+const defeito=document.getElementById('defeito').value.trim();
+const valor=document.getElementById('valor').value;
+
+if(!cliente||!telefoneInput||!endereco||!equipamento||!defeito||!valor){
+showToast('PREENCHA TODOS OS CAMPOS');
+return;
+}
+
+const telefoneLimpo = telefoneInput.replace(/\D/g, '');
+const numeroOS = Math.floor(Math.random() * 900000) + 100000;
+const data = new Date().toLocaleDateString('pt-BR');
+const statusInicial = 'EM ANÁLISE';
+
+document.getElementById('resultadoOS').style.display='block';
+document.getElementById('resultadoOS').innerHTML=`
+<div class="title" style="font-size:1.2rem; text-align:center;">ORDEM DE SERVIÇO Nº ${numeroOS}</div>
+<div class="os-box"><strong>Cliente:</strong> ${cliente}</div>
+<div class="os-box"><strong>Telefone:</strong> ${telefoneInput}</div>
+<div class="os-box"><strong>Endereço:</strong> ${endereco}</div>
+<div class="os-box"><strong>Equipamento:</strong> ${equipamento}</div>
+<div class="os-box"><strong>Defeito:</strong> ${defeito}</div>
+<div class="os-box"><strong>Serviço:</strong> ${valor}</div>
+<div class="os-box"><strong>Data:</strong> ${data}</div>
+<div class="os-box"><strong>Status:</strong> <span class="status">${statusInicial}</span></div>
+`;
+
+// Gerar PDF
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+doc.setFillColor(5,8,22);
+doc.rect(0,0,210,297,'F');
+doc.setTextColor(0,229,255);
+doc.setFontSize(22);
+doc.text('RENAN TECH PREMIUM',20,25);
+doc.setTextColor(255,255,255);
+doc.setFontSize(12);
+doc.text(`OS Nº ${numeroOS}`,20,45);
+doc.text(`Cliente: ${cliente}`,20,65);
+doc.text(`Telefone: ${telefoneInput}`,20,80);
+doc.text(`Endereço: ${endereco}`,20,95);
+doc.text(`Equipamento: ${equipamento}`,20,110);
+doc.text(`Defeito: ${defeito}`,20,130);
+doc.text(`Serviço: ${valor}`,20,150);
+doc.text(`Data: ${data}`,20,170);
+doc.save(`OS-${numeroOS}.pdf`);
+
+const mensagem=`📋 *RENAN TECH PREMIUM*
+
+🆔 *OS:* ${numeroOS}
+👤 *Cliente:* ${cliente}
+📞 *Telefone:* ${telefoneInput}
+📍 *Endereço:* ${endereco}
+💻 *Equipamento:* ${equipamento}
+⚠️ *Defeito:* ${defeito}
+🛠 *Serviço:* ${valor}
+📅 *Data:* ${data}`;
+
+window.open(`https://wa.me/5531992372280?text=${encodeURIComponent(mensagem)}`, '_blank');
+
+setTimeout(() => {
+window.open(`https://wa.me/55${telefoneLimpo}?text=${encodeURIComponent('Olá ' + cliente + '! 👋\nAqui está a cópia da sua Ordem de Serviço nº ' + numeroOS + ' gerada na Renan Tech Premium:\n\n' + mensagem)}`, '_blank');
+}, 1000);
+
+showToast('OS GERADA E COMPARTILHADA COM SUCESSO');
+}
+
+function abrirMapa(){
+const endereco=document.getElementById('endereco').value.trim();
+if(!endereco){
+showToast('DIGITE O ENDEREÇO');
+return;
+}
+window.open(`https://www.google.com/maps/search/${encodeURIComponent(endereco)}`, '_blank');
+}
+
+// Painel Admin
+function verificarSenha(){
+const senha = document.getElementById('senhaAdmin').value;
+if(senha === 'Phedaputa12.'){
+document.getElementById('painelStatus').style.display = 'block';
+document.getElementById('loginStatus').style.display = 'none';
+showToast('PAINEL LIBERADO');
+}else{
+showToast('SENHA INCORRETA');
+}
+}
+
+function enviarStatus(){
+const nome = document.getElementById('clienteNome').value.trim();
+const numero = document.getElementById('clienteNumero').value.trim().replace(/\D/g,'');
+const numOS = document.getElementById('osAtualizar').value.trim();
+const status = document.getElementById('statusServico').value;
+
+if(!nome || !numero || !numOS){
+showToast('PREENCHA TODOS OS CAMPOS');
+return;
+}
+
+const mensagem=`Olá ${nome}! 👋\n\nAqui é da Renan Tech Premium 🔧\n\nSua OS nº ${numOS} teve o status atualizado para:\n\n${status}\n\nObrigado pela preferência 🙏`;
+
+window.open(`https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`, '_blank');
+showToast('STATUS ENVIADO');
+}
+
+// PWA Instalável
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+e.preventDefault();
+deferredPrompt = e;
+document.getElementById('installBtn').style.display = 'block';
+});
+
+async function instalarAppPWA(){
+if(!deferredPrompt){
+showToast('Abra pelo menu do navegador para instalar');
+return;
+}
+deferredPrompt.prompt();
+const { outcome } = await deferredPrompt.userChoice;
+if(outcome === 'accepted'){
+document.getElementById('installBtn').style.display = 'none';
+}
+deferredPrompt = null;
+}
+
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('service-worker.js').catch(() => {});
+}
+</script>
+
+</body>
+</html>
